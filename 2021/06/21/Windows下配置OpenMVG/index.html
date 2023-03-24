@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html 
+	lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+<link rel="stylesheet" href="/css/layout.css">
+
+		
+		<title> Windows下配置OpenMVG+CMVS-PMVS -  Hexo</title>
+		<link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+		<script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+		<!-- lazyload -->
+		<script src="https://unpkg.com/lazysizes@5.1.0/lazysizes.min.js"></script>
+		<!-- smooth-scrolling -->
+		<script src="https://unpkg.com/smooth-scrolling.js@1.0.0"></script>
+		<!-- highlight -->
+		<link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.6.0/styles/atom-one-dark.min.css" />
+		<script src="//unpkg.com/@highlightjs/cdn-assets@11.6.0/highlight.min.js"></script>
+		<!-- 预置 kiraicon -->
+		<link rel="stylesheet" href="/lib/iconfont/iconfont.css" crossorigin />
+		
+			<link rel="stylesheet" href="//at.alicdn.com/t/c/font_3299330_2a7ov96q7e3.css" crossorigin />
+		
+		<link rel="stylesheet" href="/lib/iconfont/iconfont.css" crossorigin />
+		<link
+			rel="shortcut icon"
+			href="https://cdn.jsdelivr.net/gh/Chocolate-Black/pictureCDN/img/1.png"
+			type="image/png"
+		/>
+		<link rel="stylesheet" href="/deps/css/APlayer.min.css">
+		
+			
+		<link rel="stylesheet" href="/style.css" />
+			
+		<link rel="stylesheet" href="/custom.css" />
+			
+		
+		<script src="/deps/js/APlayer.min.js"></script>
+		<script src="/deps/js/Meting.min.js"></script>
+	<meta name="generator" content="Hexo 6.3.0"></head>
+
+	<body>
+		<div
+			class="kira-background"
+			style="background-image: url('https://cdn.jsdelivr.net/gh/Chocolate-Black/pictureCDN/img/linxing.png')"
+		></div>
+		<div class="kira-header">
+    <a
+        class="kira-drawer-button mdui-ripple"
+        title="导航栏"
+        onclick="document.querySelector('.kira-sidebar-modal').classList.add('show');document.querySelector('.kira-sidebar#sidebar').classList.add('show');"
+    >
+        <i class="kirafont icon-menu"></i>
+    </a>
+    <a href="/" title="Hexo">
+        <img
+			src="https://cdn.jsdelivr.net/gh/Chocolate-Black/pictureCDN/img/1.png"
+			alt="John Doe"
+		/>
+    </a>
+</div>
+		<div class="kira-body">
+			<div class="kira-sidebar" id="sidebar">
+	<div class="kira-avatar mdui-ripple">
+		<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/Chocolate-Black/pictureCDN/img/1.png" title="John Doe">
+			<img
+				src="https://cdn.jsdelivr.net/gh/Chocolate-Black/pictureCDN/img/1.png"
+				alt="John Doe"
+			/>
+		</a>
+	</div>
+	<div class="kira-count">
+		<div><span>文章</span>8</div>
+		<div><span>标签</span>19</div>
+		<div><span>分类</span>5</div>
+	</div>
+	<div class="kira-list">
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/"
+			title="回到首页"
+		>
+			<i
+				class="kirafont icon-home"
+			></i>
+			<div class="kira-list-item-content">回到首页</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/archive.html"
+			title="文章归档"
+		>
+			<i
+				class="kirafont icon-container"
+			></i>
+			<div class="kira-list-item-content">文章归档</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/about.html"
+			title="关于本人"
+		>
+			<i
+				class="kirafont icon-user"
+			></i>
+			<div class="kira-list-item-content">关于本人</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/friends.html"
+			title="我的朋友"
+		>
+			<i
+				class="kirafont icon-team"
+			></i>
+			<div class="kira-list-item-content">我的朋友</div>
+		</a>
+		
+	</div>
+	<aside id="kira-sidebar">
+		 <div class="kira-widget-wrap">
+	<div class="kira-widget kira-social">
+		<a
+			class="mdui-ripple"
+			href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=1106187173&website=www.oicqzone.com"
+			target="_blank"
+			mdui-tooltip="{content: 'QQ'}"
+			style="
+				color: rgb(49, 174, 255);
+				background-color: rgba(49, 174, 255, .1);
+			"
+		>
+			<i
+				class="kirafont icon-QQ"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://space.bilibili.com/2106744"
+			target="_blank"
+			mdui-tooltip="{content: '哔哩哔哩'}"
+			style="
+				color: rgb(231, 106, 141);
+				background-color: rgba(231, 106, 141, .15);
+			"
+		>
+			<i
+				class="kirafont icon-bilibili"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://github.com/Chocolate-Black"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(25, 23, 23);
+				background-color: rgba(25, 23, 23, .15);
+			"
+		>
+			<i
+				class="kirafont icon-github"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://gitee.com/xu_jing_yu/"
+			target="_blank"
+			mdui-tooltip="{content: 'Gitee'}"
+			style="
+				color: rgb(165, 15, 15);
+				background-color: rgba(165, 15, 15, .15);
+			"
+		>
+			<i
+				class="kirafont icon-gitee"
+			></i> </a
+		>
+	</div>
+</div>
+  
+<div class="kira-widget-wrap">
+  <h3 class="kira-widget-title">分类</h3>
+  <div class="kira-widget">
+
+    <ul class="category-list">
+
+      
+
+
+      
+
+      
+
+      <li class="category-list-item">
+        <a class="category-list-link" href="/categories/同人/">同人</a>
+        <span class="category-list-count">1</span>
+      </li>
+
+      
+
+      <li class="category-list-item">
+        <a class="category-list-link" href="/categories/我的项目/">我的项目</a>
+        <span class="category-list-count">1</span>
+      </li>
+
+      
+
+      <li class="category-list-item">
+        <a class="category-list-link" href="/categories/技术教程/">技术教程</a>
+        <span class="category-list-count">4</span>
+      </li>
+
+      
+
+      <li class="category-list-item">
+        <a class="category-list-link" href="/categories/经验分享/">经验分享</a>
+        <span class="category-list-count">2</span>
+      </li>
+
+      
+
+      <li class="category-list-item">
+        <a class="category-list-link" href="/categories/评测/">评测</a>
+        <span class="category-list-count">2</span>
+      </li>
+
+      
+    </ul>
+
+  </div>
+</div>
+  
+<div class="kira-widget-wrap">
+	<div id="randomtagcloud" class="kira-widget tagcloud kira-rainbow"><a href="/tags/AVG/" style="font-size: 20px;">AVG</a> <a href="/tags/CMVS-PMVS/" style="font-size: 10px;">CMVS-PMVS</a> <a href="/tags/C%E8%AF%AD%E8%A8%80/" style="font-size: 10px;">C语言</a> <a href="/tags/LSTM/" style="font-size: 15px;">LSTM</a> <a href="/tags/OpenMVG/" style="font-size: 10px;">OpenMVG</a> <a href="/tags/%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA/" style="font-size: 10px;">三维重建</a> <a href="/tags/%E4%B8%B0%E8%A3%95%E4%B9%8B%E8%A7%92/" style="font-size: 10px;">丰裕之角</a> <a href="/tags/%E4%BA%BA%E4%BD%93%E5%8A%A8%E4%BD%9C%E8%AF%86%E5%88%AB/" style="font-size: 10px;">人体动作识别</a> <a href="/tags/%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4/" style="font-size: 10px;">协同过滤</a> <a href="/tags/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">图神经网络</a> <a href="/tags/%E5%A4%8F%E4%BB%A4%E8%90%A5/" style="font-size: 10px;">夏令营</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 10px;">微信小程序</a> <a href="/tags/%E6%89%8B%E6%9C%BA%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">手机游戏</a> <a href="/tags/%E6%89%93%E5%81%87/" style="font-size: 10px;">打假</a> <a href="/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/" style="font-size: 15px;">推荐系统</a> <a href="/tags/%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F/" style="font-size: 10px;">明日方舟</a> <a href="/tags/%E6%B0%B4%E6%9C%88%E9%99%B5/" style="font-size: 10px;">水月陵</a> <a href="/tags/%E7%A7%8B%E4%B9%8B%E5%9B%9E%E5%BF%86/" style="font-size: 10px;">秋之回忆</a> <a href="/tags/%E9%9F%B3%E4%B9%90/" style="font-size: 10px;">音乐</a></div>
+	
+</div>
+
+ 
+	</aside>
+	<div class="kira-copyright">
+		&copy; 2023
+		<a href="/">John Doe</a
+		>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> &
+		<!-- TODO: github 链接 -->
+		<a href="https://github.com/ch1ny/kira-hexo/" target="_blank">Kira-Hexo</a>
+		<br />
+		
+			<a href="https://beian.miit.gov.cn/" target="_blank">赣ICP备******号</a>
+		
+		
+	</div>
+</div>
+<div class="kira-sidebar-modal" id="sidebar-modal" onclick="(function(self) {
+	self.classList.remove('show');
+	document.querySelector('.kira-sidebar.show#sidebar').classList.remove('show');
+})(this)"></div>
+			<div class="kira-content">
+				<div id="kira-top-header"></div>
+				<div class="kira-main-content">
+					
+<link rel="stylesheet" href="/css/kira-image.css">
+
+<script src="/js/kira-image.js"></script>
+<div class="kira-image">
+    <div class="kira-image-modal">
+        <div class="kira-image-header">
+            <div class="kira-image-counter"></div>
+            <div class="kira-image-title"></div>
+            <div class="kira-image-operation">
+                <div class="kira-image-operation-button" id="kira-image-operation-button-zoom">
+                    <i class="kirafont icon-zoom-in"></i>
+                </div>
+                <div class="kira-image-operation-button" id="kira-image-operation-button-close">
+                    <i class="kirafont icon-close"></i>
+                </div>
+            </div>
+        </div>
+        <div class="kira-image-container">
+            <div class="kira-image-prev-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-left"></i>
+                </div>
+            </div>
+            <div class="kira-image-list">
+                <div class="kira-image-prev">
+                    <img />
+                </div>
+                <div class="kira-image-now">
+                    <img />
+                </div>
+                <div class="kira-image-next">
+                    <img />
+                </div>
+            </div>
+            <div class="kira-image-next-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="kira-post">
+	<article>
+		
+		<div class="kira-post-cover">
+			<img
+				data-src="https://cdn.jsdelivr.net/gh/Chocolate-Black/pictureCDN/img/00002.png"
+				data-sizes="auto"
+				alt="Windows下配置OpenMVG+CMVS-PMVS"
+				class="lazyload kira-post-cover-image disabled-kira-image"
+			/>
+			<h1>Windows下配置OpenMVG+CMVS-PMVS</h1>
+		</div>
+		
+		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
+			<a><i class="kirafont icon-calendar-fill"></i>2021年06月21日</a>
+			<a><i class="kirafont icon-areachart"></i>875 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 3 分钟</a>
+		</div>
+		<blockquote>
+<p>前言：因为自己的Linux系统空间不太够，跑不了pmvs做稠密重建，不得已换回windows系统去跑。然而windows配置OpenMVG和CMVS-PMVS实在是有点麻烦，加上网上相关的教程几乎没有（甚至有的是错的……），花了一整个下午才弄好。鉴于目前网上还没有相关的windows配置OpenMVG+CMVS-PMVS详细教程，于是趁热写下一篇。不过我的建议还是能用Linux还是用Linux。</p>
+<p>另外，养成好习惯，多看看仓库里的MD文件。实际上在Windows的配置，人家已经在Build.md文件里讲的差不多了。</p>
+</blockquote>
+<h2><span id="一-windows下配置openmvg">一、Windows下配置OpenMVG</span></h2><h3><span id="1下载源代码">（1）下载源代码</span></h3><p>首先我们要从GitHub上git下OpenMVG的代码：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-variable">$</span> git clone <span class="hljs-literal">--recursive</span> https://github.com/openMVG/openMVG.git<br></code></pre></td></tr></table></figure>
+
+<p>加recursive是为了同时把OpenMVG的子模块下载下来，如果单纯clone下来的话，还需要运行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ps1con">$ git submodule update --init --recursive<br></code></pre></td></tr></table></figure>
+
+<p>*<strong>如果网速不好，无法直接从GitHub下载怎么办？</strong></p>
+<p>我们可以用国内的<a href="http://link.zhihu.com/?target=https://gitee.com/">码云</a>来解决这一问题。首先，我们把OpenMVG fork到我们的GitHub仓库，然后，进入&#x2F;src&#x2F;dependencies文件夹，里面的三个文件夹就是OpenMVG的子模块。我们分别点进这三个子模块，跳转页面，把这三个子模块也fork到我们的仓库。</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://picx.zhimg.com/80/v2-db8140df3af466404b7573b465ffceb0_1440w.webp?source=d16d100b" alt="img" class="lazyload"></p>
+<p>之后，我们进入码云。登录&#x2F;注册账号完成进入主页，点击右上方加号按钮，点击导入仓库，导入Github仓库，账号授权后，把我们刚才fork后的仓库导入到码云的仓库里。</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://picx.zhimg.com/80/v2-7f772c7fc11af42568939d613d53df6c_1440w.webp?source=d16d100b" alt="img" class="lazyload"></p>
+<p>然后，我们复制码云里的OpenMVG仓库链接，git clone [码云里的OpenMVG仓库链接]。打开OpenMVG文件夹，修改.gitmodules文件，把三个子模块里的url链接替换为码云里的链接。之后在OpenMVG文件夹里运行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ps1con">$ git submodule update --init --recursive<br></code></pre></td></tr></table></figure>
+
+<p>即可完成下载。</p>
+<h3><span id="2编译openmvg">（2）编译OpenMVG</span></h3><p>首先，我们需要确保我们的Windows系统有Cmake以及15版本及以上的VS（Visual Studio）。没有的话需要先下载。这里就不多讲了，网上教程很多，直接百度即可。</p>
+<p>之后，我们在OpenMVG的src文件夹里新建一个build文件夹，然后打开cmake-gui，在source code处填OpenMVG的src的文件夹路径，在build the binaries处填新建的build文件夹的路径。</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://pic1.zhimg.com/80/v2-f17f620f7f316f8bb28cf9b5e853a7d6_1440w.webp?source=d16d100b" alt="img" class="lazyload"></p>
+<p>然后点击Configure，选择Generator为VS，然后点确定。Configure运行完成后，点击Generate。</p>
+<p>之后打开build文件夹，打开openMVG.sln，将解决方案配置改为Release，之后运行，等待编译完成。期间可能会有报错，但是问题不大，不会影响后续的使用。</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://picx.zhimg.com/80/v2-e1497edc6fd3915e81d9c0c871109edd_1440w.webp?source=d16d100b" alt="img" class="lazyload"></p>
+<h3><span id="3设置环境变量">（3）设置环境变量</span></h3><p>编译完成后，打开build目录下的Release文件夹（我这里的文件夹名为Windows-AMD64-Release），再点开里面的Release文件夹，可以发现，我们OpenMVG的程序都放在这里。我们把存放程序的Release文件夹的路径复制，右键桌面的计算机，点击属性-&gt;高级系统设置-&gt;高级-&gt;环境变量，在系统变量里的Path中添加我们刚才复制的路径，之后就可以使用了。</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://picx.zhimg.com/80/v2-1ca4119c5e43bd61ce99eac5a20fdeef_1440w.webp?source=d16d100b" alt="img" class="lazyload"></p>
+<h2><span id="二-windows下配置cmvs-pmvs">二、Windows下配置CMVS-PMVS</span></h2><p>这个相对来说比OpenMVG简单不少。首先老样子，先clone下仓库（这里没有子模块，直接clone就行）。</p>
+<p>之后把文件夹里的&#x2F;binariesWin-Linux&#x2F;Win64-VS2010（32位的选择Win64-VS2010）的路径按照同样的方式添加进环境变量就OK啦！</p>
+
+	</article>
+
+	 
+    <div class="kira-post-copyright">
+        <strong>Author：</strong>John Doe<br>
+        <strong>Link：</strong><a href="http://example.com/2021/06/21/Windows%E4%B8%8B%E9%85%8D%E7%BD%AEOpenMVG/" title="http:&#x2F;&#x2F;example.com&#x2F;2021&#x2F;06&#x2F;21&#x2F;Windows下配置OpenMVG&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;example.com&#x2F;2021&#x2F;06&#x2F;21&#x2F;Windows下配置OpenMVG&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+  
+	<div class="kira-post-nav">
+		<nav class="post-nav">
+			          
+			<!-- 先找到与当前文字相同的目录 -->
+			            
+			<!-- 在找到当前文章所在的 index -->
+			            
+			<!-- 上一篇文章 -->
+			<div class="old">
+				<span>上一章</span>
+				<a href="/2021/02/01/%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F%E7%B2%BE%E4%BA%8CBox%E6%8E%A8%E8%8D%90%E5%99%A8%EF%BC%9A%E7%BD%97%E5%BE%B7%E5%B2%9B%E4%B9%8B%E5%BF%83%EF%BC%8C%E9%A1%B9%E7%9B%AE%E5%BF%83%E5%BE%97%E4%B8%8E%E7%BB%8F%E9%AA%8C/"> 明日方舟精二Box推荐器：罗德岛之心，项目心得与经验</a>
+			</div>
+			                  
+		</nav>
+	</div>
+	
+	<div class="kira-post-meta kira-rainbow">
+		
+			<a class="kirafont icon-appstore-fill -link" href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a>
+		
+		
+			<a class="kirafont icon-tag-fill -none-link" href="/tags/CMVS-PMVS/" rel="tag">CMVS-PMVS</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/OpenMVG/" rel="tag">OpenMVG</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA/" rel="tag">三维重建</a>
+		
+	</div>
+	
+		<script src="/js/kira-code-copy.js"></script>
+	
+	
+	<div class="kira-post-footer">
+		
+
+		
+	</div>
+	
+</div>
+
+				</div>
+			</div>
+			<div class="kira-right-column">
+	<a onclick="document.querySelector('#kira-top-header').scrollIntoView({behavior: 'smooth'});" class="kira-backtotop" aria-label="回到顶部" title="回到顶部">
+		<button class="mdui-fab mdui-ripple">
+			<i class="kirafont icon-caret-up"></i>
+		</button>
+	</a>
+</div>
+
+		</div>
+	</body>
+</html>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html 
+	lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+<link rel="stylesheet" href="/css/layout.css">
+
+		
+		<title> 【图协同过滤】对顶会论文HCCF以及LightGCL模型的一些质疑 -  Hexo</title>
+		<link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+		<script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+		<!-- lazyload -->
+		<script src="https://unpkg.com/lazysizes@5.1.0/lazysizes.min.js"></script>
+		<!-- smooth-scrolling -->
+		<script src="https://unpkg.com/smooth-scrolling.js@1.0.0"></script>
+		<!-- highlight -->
+		<link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.6.0/styles/atom-one-dark.min.css" />
+		<script src="//unpkg.com/@highlightjs/cdn-assets@11.6.0/highlight.min.js"></script>
+		<!-- 预置 kiraicon -->
+		<link rel="stylesheet" href="/lib/iconfont/iconfont.css" crossorigin />
+		
+			<link rel="stylesheet" href="//at.alicdn.com/t/c/font_3299330_2a7ov96q7e3.css" crossorigin />
+		
+		<link rel="stylesheet" href="/lib/iconfont/iconfont.css" crossorigin />
+		<link
+			rel="shortcut icon"
+			href="https://cdn.jsdelivr.net/gh/Chocolate-Black/pictureCDN/img/1.png"
+			type="image/png"
+		/>
+		<link rel="stylesheet" href="/deps/css/APlayer.min.css">
+		
+			
+		<link rel="stylesheet" href="/style.css" />
+			
+		<link rel="stylesheet" href="/custom.css" />
+			
+		
+		<script src="/deps/js/APlayer.min.js"></script>
+		<script src="/deps/js/Meting.min.js"></script>
+	<meta name="generator" content="Hexo 6.3.0"></head>
+
+	<body>
+		<div
+			class="kira-background"
+			style="background-image: url('https://cdn.jsdelivr.net/gh/Chocolate-Black/pictureCDN/img/linxing.png')"
+		></div>
+		<div class="kira-header">
+    <a
+        class="kira-drawer-button mdui-ripple"
+        title="导航栏"
+        onclick="document.querySelector('.kira-sidebar-modal').classList.add('show');document.querySelector('.kira-sidebar#sidebar').classList.add('show');"
+    >
+        <i class="kirafont icon-menu"></i>
+    </a>
+    <a href="/" title="Hexo">
+        <img
+			src="https://cdn.jsdelivr.net/gh/Chocolate-Black/pictureCDN/img/1.png"
+			alt="John Doe"
+		/>
+    </a>
+</div>
+		<div class="kira-body">
+			<div class="kira-sidebar" id="sidebar">
+	<div class="kira-avatar mdui-ripple">
+		<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/Chocolate-Black/pictureCDN/img/1.png" title="John Doe">
+			<img
+				src="https://cdn.jsdelivr.net/gh/Chocolate-Black/pictureCDN/img/1.png"
+				alt="John Doe"
+			/>
+		</a>
+	</div>
+	<div class="kira-count">
+		<div><span>文章</span>8</div>
+		<div><span>标签</span>19</div>
+		<div><span>分类</span>5</div>
+	</div>
+	<div class="kira-list">
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/"
+			title="回到首页"
+		>
+			<i
+				class="kirafont icon-home"
+			></i>
+			<div class="kira-list-item-content">回到首页</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/archive.html"
+			title="文章归档"
+		>
+			<i
+				class="kirafont icon-container"
+			></i>
+			<div class="kira-list-item-content">文章归档</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/about.html"
+			title="关于本人"
+		>
+			<i
+				class="kirafont icon-user"
+			></i>
+			<div class="kira-list-item-content">关于本人</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/friends.html"
+			title="我的朋友"
+		>
+			<i
+				class="kirafont icon-team"
+			></i>
+			<div class="kira-list-item-content">我的朋友</div>
+		</a>
+		
+	</div>
+	<aside id="kira-sidebar">
+		 <div class="kira-widget-wrap">
+	<div class="kira-widget kira-social">
+		<a
+			class="mdui-ripple"
+			href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=1106187173&website=www.oicqzone.com"
+			target="_blank"
+			mdui-tooltip="{content: 'QQ'}"
+			style="
+				color: rgb(49, 174, 255);
+				background-color: rgba(49, 174, 255, .1);
+			"
+		>
+			<i
+				class="kirafont icon-QQ"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://space.bilibili.com/2106744"
+			target="_blank"
+			mdui-tooltip="{content: '哔哩哔哩'}"
+			style="
+				color: rgb(231, 106, 141);
+				background-color: rgba(231, 106, 141, .15);
+			"
+		>
+			<i
+				class="kirafont icon-bilibili"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://github.com/Chocolate-Black"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(25, 23, 23);
+				background-color: rgba(25, 23, 23, .15);
+			"
+		>
+			<i
+				class="kirafont icon-github"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://gitee.com/xu_jing_yu/"
+			target="_blank"
+			mdui-tooltip="{content: 'Gitee'}"
+			style="
+				color: rgb(165, 15, 15);
+				background-color: rgba(165, 15, 15, .15);
+			"
+		>
+			<i
+				class="kirafont icon-gitee"
+			></i> </a
+		>
+	</div>
+</div>
+  
+<div class="kira-widget-wrap">
+  <h3 class="kira-widget-title">分类</h3>
+  <div class="kira-widget">
+
+    <ul class="category-list">
+
+      
+
+
+      
+
+      
+
+      <li class="category-list-item">
+        <a class="category-list-link" href="/categories/同人/">同人</a>
+        <span class="category-list-count">1</span>
+      </li>
+
+      
+
+      <li class="category-list-item">
+        <a class="category-list-link" href="/categories/我的项目/">我的项目</a>
+        <span class="category-list-count">1</span>
+      </li>
+
+      
+
+      <li class="category-list-item">
+        <a class="category-list-link" href="/categories/技术教程/">技术教程</a>
+        <span class="category-list-count">4</span>
+      </li>
+
+      
+
+      <li class="category-list-item">
+        <a class="category-list-link" href="/categories/经验分享/">经验分享</a>
+        <span class="category-list-count">2</span>
+      </li>
+
+      
+
+      <li class="category-list-item">
+        <a class="category-list-link" href="/categories/评测/">评测</a>
+        <span class="category-list-count">2</span>
+      </li>
+
+      
+    </ul>
+
+  </div>
+</div>
+  
+<div class="kira-widget-wrap">
+	<div id="randomtagcloud" class="kira-widget tagcloud kira-rainbow"><a href="/tags/AVG/" style="font-size: 20px;">AVG</a> <a href="/tags/CMVS-PMVS/" style="font-size: 10px;">CMVS-PMVS</a> <a href="/tags/C%E8%AF%AD%E8%A8%80/" style="font-size: 10px;">C语言</a> <a href="/tags/LSTM/" style="font-size: 15px;">LSTM</a> <a href="/tags/OpenMVG/" style="font-size: 10px;">OpenMVG</a> <a href="/tags/%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA/" style="font-size: 10px;">三维重建</a> <a href="/tags/%E4%B8%B0%E8%A3%95%E4%B9%8B%E8%A7%92/" style="font-size: 10px;">丰裕之角</a> <a href="/tags/%E4%BA%BA%E4%BD%93%E5%8A%A8%E4%BD%9C%E8%AF%86%E5%88%AB/" style="font-size: 10px;">人体动作识别</a> <a href="/tags/%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4/" style="font-size: 10px;">协同过滤</a> <a href="/tags/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">图神经网络</a> <a href="/tags/%E5%A4%8F%E4%BB%A4%E8%90%A5/" style="font-size: 10px;">夏令营</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 10px;">微信小程序</a> <a href="/tags/%E6%89%8B%E6%9C%BA%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">手机游戏</a> <a href="/tags/%E6%89%93%E5%81%87/" style="font-size: 10px;">打假</a> <a href="/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/" style="font-size: 15px;">推荐系统</a> <a href="/tags/%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F/" style="font-size: 10px;">明日方舟</a> <a href="/tags/%E6%B0%B4%E6%9C%88%E9%99%B5/" style="font-size: 10px;">水月陵</a> <a href="/tags/%E7%A7%8B%E4%B9%8B%E5%9B%9E%E5%BF%86/" style="font-size: 10px;">秋之回忆</a> <a href="/tags/%E9%9F%B3%E4%B9%90/" style="font-size: 10px;">音乐</a></div>
+	
+</div>
+
+ 
+	</aside>
+	<div class="kira-copyright">
+		&copy; 2023
+		<a href="/">John Doe</a
+		>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> &
+		<!-- TODO: github 链接 -->
+		<a href="https://github.com/ch1ny/kira-hexo/" target="_blank">Kira-Hexo</a>
+		<br />
+		
+			<a href="https://beian.miit.gov.cn/" target="_blank">赣ICP备******号</a>
+		
+		
+	</div>
+</div>
+<div class="kira-sidebar-modal" id="sidebar-modal" onclick="(function(self) {
+	self.classList.remove('show');
+	document.querySelector('.kira-sidebar.show#sidebar').classList.remove('show');
+})(this)"></div>
+			<div class="kira-content">
+				<div id="kira-top-header"></div>
+				<div class="kira-main-content">
+					
+<link rel="stylesheet" href="/css/kira-image.css">
+
+<script src="/js/kira-image.js"></script>
+<div class="kira-image">
+    <div class="kira-image-modal">
+        <div class="kira-image-header">
+            <div class="kira-image-counter"></div>
+            <div class="kira-image-title"></div>
+            <div class="kira-image-operation">
+                <div class="kira-image-operation-button" id="kira-image-operation-button-zoom">
+                    <i class="kirafont icon-zoom-in"></i>
+                </div>
+                <div class="kira-image-operation-button" id="kira-image-operation-button-close">
+                    <i class="kirafont icon-close"></i>
+                </div>
+            </div>
+        </div>
+        <div class="kira-image-container">
+            <div class="kira-image-prev-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-left"></i>
+                </div>
+            </div>
+            <div class="kira-image-list">
+                <div class="kira-image-prev">
+                    <img />
+                </div>
+                <div class="kira-image-now">
+                    <img />
+                </div>
+                <div class="kira-image-next">
+                    <img />
+                </div>
+            </div>
+            <div class="kira-image-next-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="kira-post">
+	<article>
+		
+		<div class="kira-post-cover">
+			<img
+				data-src="https://cdn.jsdelivr.net/gh/Chocolate-Black/pictureCDN/img/00002.png"
+				data-sizes="auto"
+				alt="【图协同过滤】对顶会论文HCCF以及LightGCL模型的一些质疑"
+				class="lazyload kira-post-cover-image disabled-kira-image"
+			/>
+			<h1>【图协同过滤】对顶会论文HCCF以及LightGCL模型的一些质疑</h1>
+		</div>
+		
+		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
+			<a><i class="kirafont icon-calendar-fill"></i>2023年03月17日</a>
+			<a><i class="kirafont icon-areachart"></i>1.3k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 6 分钟</a>
+		</div>
+		<p>最近在写代码复现ICLR 2023《SIMPLE YET EFFECTIVE GRAPH CONTRASTIVE LEARNING FOR RECOMMENDATION》这篇文章，结果效果一看竟然连LightGCN还不如，更离谱的是在有些数据集上竟然发生了梯度爆炸。明明数据集一样，这怎么回事呢？我一度以为是自己的代码写错了，后来检查N遍也没发现问题在哪儿，复制过去一样的forward函数，结果却差得离谱。</p>
+<p>最后我才发现，问题出在采样函数上，代码如下（[GitHub - HKUDS&#x2F;LightGCL: <a href="http://link.zhihu.com/?target=https://github.com/HKUDS/LightGCL/">ICLR’2023] LightGCL: Simple Yet Effective Graph Contrastive Learning for Recommendation</a> main.py）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs python3">e_users = np.random.permutation(adj_norm.shape[0])[:epoch_user]<br>batch_no = int(np.ceil(epoch_user/batch_user))<br><br>epoch_loss = 0<br>epoch_loss_r = 0<br>epoch_loss_s = 0<br>for batch in tqdm(range(batch_no)):<br>    start = batch*batch_user<br>    end = min((batch+1)*batch_user,epoch_user)<br>    batch_users = e_users[start:end]<br><br>    # sample pos and neg<br>    pos = []<br>    neg = []<br>    iids = set()<br>    for i in range(len(batch_users)):<br>        u = batch_users[i]<br>        u_interact = train_csr[u].toarray()[0]<br>        positive_items = np.random.permutation(np.where(u_interact==1)[0])<br>        negative_items = np.random.permutation(np.where(u_interact==0)[0])<br>        item_num = min(max_samp,len(positive_items))<br>        positive_items = positive_items[:item_num]<br>        negative_items = negative_items[:item_num]<br>        pos.append(torch.LongTensor(positive_items).cuda(torch.device(device)))<br>        neg.append(torch.LongTensor(negative_items).cuda(torch.device(device)))<br>        iids = iids.union(set(positive_items))<br>        iids = iids.union(set(negative_items))<br>    iids = torch.LongTensor(list(iids)).cuda(torch.device(device))<br>    uids = torch.LongTensor(batch_users).cuda(torch.device(device))<br></code></pre></td></tr></table></figure>
+
+<p>可以看到，模型首先对user打乱顺序（<strong>注意是打乱顺序</strong>），然后根据batch size（<strong>256</strong>）对user划分。然后，对于每一轮batch中的user，挑选min(max_samp, len(positive_items))个正样本和负样本。</p>
+<p>乍一看好像没啥问题，对比下LightGCN的采样函数：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs text">def UniformSample_original_python(dataset):<br>    &quot;&quot;&quot;<br>    the original impliment of BPR Sampling in LightGCN<br>    :return:<br>        np.array<br>    &quot;&quot;&quot;<br>    total_start = time()<br>    dataset : BasicDataset<br>    user_num = dataset.trainDataSize<br>    users = np.random.randint(0, dataset.n_users, user_num)<br>    allPos = dataset.allPos<br>    S = []<br>    sample_time1 = 0.<br>    sample_time2 = 0.<br>    for i, user in enumerate(users):<br>        start = time()<br>        posForUser = allPos[user]<br>        if len(posForUser) == 0:<br>            continue<br>        sample_time2 += time() - start<br>        posindex = np.random.randint(0, len(posForUser))<br>        positem = posForUser[posindex]<br>        while True:<br>            negitem = np.random.randint(0, dataset.m_items)<br>            if negitem in posForUser:<br>                continue<br>            else:<br>                break<br>        S.append([user, positem, negitem])<br>        end = time()<br>        sample_time1 += end - start<br>    total = time() - total_start<br>    return np.array(S)<br></code></pre></td></tr></table></figure>
+
+<p><strong>可以看到LightGCN是对user以及item同时进行了随机抽样（可重复选取），之后才根据batch size（4096）划分。</strong>我个人做实验发现这两种采样方法对模型影响巨大。前者的采样方式更容易造成过拟合。事实上作者HCCF的作者也回复我，承认采样方法存在缺陷，他认为这种缺陷是由于每个epoch过于集中关注少部分user导致的。</p>
+<p>事实上前者的采样是一种不合理的假随机采样方法，这极易导致模型过拟合。</p>
+<p>同样有这个问题的是SIGIR’22 的《Hypergraph Contrastive Collaborative Filtering》，采样代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><code class="hljs python3">def sampleTrainBatch(self, batIds, labelMat):<br>		temLabel = labelMat[batIds].toarray()<br>		batch = len(batIds)<br>		temlen = batch * 2 * args.sampNum<br>		uLocs = [None] * temlen<br>		iLocs = [None] * temlen<br>		cur = 0<br>		for i in range(batch):<br>			posset = np.reshape(np.argwhere(temLabel[i]!=0), [-1])<br>			sampNum = min(args.sampNum, len(posset))<br>			if sampNum == 0:<br>				poslocs = [np.random.choice(args.item)]<br>				neglocs = [poslocs[0]]<br>			else:<br>				poslocs = np.random.choice(posset, sampNum)<br>				neglocs = negSamp(temLabel[i], sampNum, args.item)<br>			for j in range(sampNum):<br>				posloc = poslocs[j]<br>				negloc = neglocs[j]<br>				uLocs[cur] = uLocs[cur+temlen//2] = batIds[i]<br>				iLocs[cur] = posloc<br>				iLocs[cur+temlen//2] = negloc<br>				cur += 1<br>		uLocs = uLocs[:cur] + uLocs[temlen//2: temlen//2 + cur]<br>		iLocs = iLocs[:cur] + iLocs[temlen//2: temlen//2 + cur]<br>		return uLocs, iLocs<br><br>	def trainEpoch(self):<br>		num = args.user<br>		sfIds = np.random.permutation(num)[:args.trnNum]<br>		epochLoss, epochPreLoss = [0] * 2<br>		num = len(sfIds)<br>		steps = int(np.ceil(num / args.batch))<br><br>		for i in range(steps):<br>			st = i * args.batch<br>			ed = min((i+1) * args.batch, num)<br>			batIds = sfIds[st: ed]<br><br>			target = [self.optimizer, self.preLoss, self.regLoss, self.loss]<br>			feed_dict = &#123;&#125;<br>			uLocs, iLocs = self.sampleTrainBatch(batIds, self.handler.trnMat)<br>			feed_dict[self.uids] = uLocs<br>			feed_dict[self.iids] = iLocs<br>			feed_dict[self.keepRate] = args.keepRate<br><br>			res = self.sess.run(target, feed_dict=feed_dict, options=config_pb2.RunOptions(report_tensor_allocations_upon_oom=True))<br><br>			preLoss, regLoss, loss = res[1:]<br><br>			epochLoss += loss<br>			epochPreLoss += preLoss<br>			log(&#x27;Step %d/%d: loss = %.2f, regLoss = %.2f         &#x27; % (i, steps, loss, regLoss), save=False, oneline=True)<br>		ret = dict()<br>		ret[&#x27;Loss&#x27;] = epochLoss / steps<br>		ret[&#x27;preLoss&#x27;] = epochPreLoss / steps<br>		return ret<br></code></pre></td></tr></table></figure>
+
+<p>可以看到，这篇文章的采样方法和LightGCL是一样的。</p>
+<p>我注意到无论是github上还是知乎都有人说HCCF的复现效果并不好，甚至不如LightGCN。我测LightGCL也是比不过LightGCN。于是我怀疑这两篇文章都有问题。作者在回复中给了他们baseline模型测试的链接：<a href="http://link.zhihu.com/?target=https://github.com/HKUDS/SSLRec">https://github.com/HKUDS/SSLRec</a></p>
+<p>结果参数一看，差别很大（<a href="http://link.zhihu.com/?target=https://github.com/HKUDS/SSLRec/tree/main/config/modelconf">SSLRec&#x2F;config&#x2F;modelconf at main · HKUDS&#x2F;SSLRec (github.com)</a>）</p>
+<p>首先看一下他们对LightGCN的参数设置：</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://pic1.zhimg.com/80/v2-c4c7c25494856b2d5e87de88c770e2b7_1440w.webp?source=d16d100b" alt="img" class="lazyload"></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/HKUDS/SSLRec/blob/main/config/modelconf/lightgcn.yml">https://github.com/HKUDS/SSLRec/blob/main/config/modelconf/lightgcn.yml</a></p>
+<p>首先，embedding size就给人从64削到32，layer层数从3削到2，train epoch更是直接减到100。lightGCN这种收敛很慢的模型，一般是300epoch左右才会收敛，好家伙直接给人干到100。这baseline效果不低才离谱。</p>
+<p>再看看他们对NCL（WWW’22 《Improving Graph Collaborative Filtering with Neighborhood-enriched Contrastive Learning》）的设置，差距就更大了。我放下原模型和他们测试的参数设置，大家可以对比一下。</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://picx.zhimg.com/80/v2-c0602c8cd5df99452fc58eeecc4f8d43_1440w.webp?source=d16d100b" alt="img" class="lazyload"></p>
+<p>NCL源代码 <a target="_blank" rel="noopener" href="https://github.com/RUCAIBox/NCL/blob/master/properties/NCL.yaml">https://github.com/RUCAIBox/NCL/blob/master/properties/NCL.yaml</a></p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://pic1.zhimg.com/80/v2-675f293fadf3daf345fe742f69c6094f_1440w.webp?source=d16d100b" alt="img" class="lazyload"></p>
+<p>HCCF作者给的baseline测试设置，<a target="_blank" rel="noopener" href="https://github.com/HKUDS/SSLRec/blob/main/config/modelconf/ncl.yml">https://github.com/HKUDS/SSLRec/blob/main/config/modelconf/ncl.yml</a></p>
+<p>参数差的最大的都5个数量级了。我针对这个问题给作者发了邮件，作者回答如下：</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://picx.zhimg.com/80/v2-2a508d065562478a8f216cedb595727b_1440w.webp?source=d16d100b" alt="img" class="lazyload"></p>
+<p>作者个人隐私信息未截图</p>
+<p>实际上LightGCL embedding&#x3D;64和layer&#x3D;3的情况我也测试过，效果依旧不如LightGCN。希望各位看A会论文的时候擦亮双眼，该好好复现还得好好复现，而且最好自己手写，不然掉了坑也不明白咋回事。</p>
+
+	</article>
+
+	 
+    <div class="kira-post-copyright">
+        <strong>Author：</strong>John Doe<br>
+        <strong>Link：</strong><a href="http://example.com/2023/03/17/%E3%80%90%E5%9B%BE%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E3%80%91%E5%AF%B9%E9%A1%B6%E4%BC%9A%E8%AE%BA%E6%96%87HCCF%E4%BB%A5%E5%8F%8ALightGCL%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E8%B4%A8%E7%96%91/" title="http:&#x2F;&#x2F;example.com&#x2F;2023&#x2F;03&#x2F;17&#x2F;【图协同过滤】对顶会论文HCCF以及LightGCL模型的一些质疑&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;example.com&#x2F;2023&#x2F;03&#x2F;17&#x2F;【图协同过滤】对顶会论文HCCF以及LightGCL模型的一些质疑&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+  
+	<div class="kira-post-nav">
+		<nav class="post-nav">
+			              
+			<!-- 先找到与当前文字相同的目录 -->
+			      
+			<!-- 在找到当前文章所在的 index -->
+			    
+			<!-- 上一篇文章 -->
+			<div class="old">
+				<span>上一章</span>
+				<a href="/2021/02/01/%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F%E7%B2%BE%E4%BA%8CBox%E6%8E%A8%E8%8D%90%E5%99%A8%EF%BC%9A%E7%BD%97%E5%BE%B7%E5%B2%9B%E4%B9%8B%E5%BF%83%EF%BC%8C%E9%A1%B9%E7%9B%AE%E5%BF%83%E5%BE%97%E4%B8%8E%E7%BB%8F%E9%AA%8C/"> 明日方舟精二Box推荐器：罗德岛之心，项目心得与经验</a>
+			</div>
+			              
+		</nav>
+	</div>
+	
+	<div class="kira-post-meta kira-rainbow">
+		
+			<a class="kirafont icon-appstore-fill -link" href="/categories/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/">经验分享</a>
+		
+		
+			<a class="kirafont icon-tag-fill -none-link" href="/tags/%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4/" rel="tag">协同过滤</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="tag">图神经网络</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/%E6%89%93%E5%81%87/" rel="tag">打假</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/" rel="tag">推荐系统</a>
+		
+	</div>
+	
+		<script src="/js/kira-code-copy.js"></script>
+	
+	
+	<div class="kira-post-footer">
+		
+
+		
+	</div>
+	
+</div>
+
+				</div>
+			</div>
+			<div class="kira-right-column">
+	<a onclick="document.querySelector('#kira-top-header').scrollIntoView({behavior: 'smooth'});" class="kira-backtotop" aria-label="回到顶部" title="回到顶部">
+		<button class="mdui-fab mdui-ripple">
+			<i class="kirafont icon-caret-up"></i>
+		</button>
+	</a>
+</div>
+
+		</div>
+	</body>
+</html>

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html 
+	lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+<link rel="stylesheet" href="/css/layout.css">
+
+		
+		<title> 明日方舟精二Box推荐器：罗德岛之心，项目心得与经验 -  Hexo</title>
+		<link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+		<script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+		<!-- lazyload -->
+		<script src="https://unpkg.com/lazysizes@5.1.0/lazysizes.min.js"></script>
+		<!-- smooth-scrolling -->
+		<script src="https://unpkg.com/smooth-scrolling.js@1.0.0"></script>
+		<!-- highlight -->
+		<link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.6.0/styles/atom-one-dark.min.css" />
+		<script src="//unpkg.com/@highlightjs/cdn-assets@11.6.0/highlight.min.js"></script>
+		<!-- 预置 kiraicon -->
+		<link rel="stylesheet" href="/lib/iconfont/iconfont.css" crossorigin />
+		
+			<link rel="stylesheet" href="//at.alicdn.com/t/c/font_3299330_2a7ov96q7e3.css" crossorigin />
+		
+		<link rel="stylesheet" href="/lib/iconfont/iconfont.css" crossorigin />
+		<link
+			rel="shortcut icon"
+			href="https://cdn.jsdelivr.net/gh/Chocolate-Black/pictureCDN/img/1.png"
+			type="image/png"
+		/>
+		<link rel="stylesheet" href="/deps/css/APlayer.min.css">
+		
+			
+		<link rel="stylesheet" href="/style.css" />
+			
+		<link rel="stylesheet" href="/custom.css" />
+			
+		
+		<script src="/deps/js/APlayer.min.js"></script>
+		<script src="/deps/js/Meting.min.js"></script>
+	<meta name="generator" content="Hexo 6.3.0"></head>
+
+	<body>
+		<div
+			class="kira-background"
+			style="background-image: url('https://cdn.jsdelivr.net/gh/Chocolate-Black/pictureCDN/img/linxing.png')"
+		></div>
+		<div class="kira-header">
+    <a
+        class="kira-drawer-button mdui-ripple"
+        title="导航栏"
+        onclick="document.querySelector('.kira-sidebar-modal').classList.add('show');document.querySelector('.kira-sidebar#sidebar').classList.add('show');"
+    >
+        <i class="kirafont icon-menu"></i>
+    </a>
+    <a href="/" title="Hexo">
+        <img
+			src="https://cdn.jsdelivr.net/gh/Chocolate-Black/pictureCDN/img/1.png"
+			alt="John Doe"
+		/>
+    </a>
+</div>
+		<div class="kira-body">
+			<div class="kira-sidebar" id="sidebar">
+	<div class="kira-avatar mdui-ripple">
+		<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/Chocolate-Black/pictureCDN/img/1.png" title="John Doe">
+			<img
+				src="https://cdn.jsdelivr.net/gh/Chocolate-Black/pictureCDN/img/1.png"
+				alt="John Doe"
+			/>
+		</a>
+	</div>
+	<div class="kira-count">
+		<div><span>文章</span>8</div>
+		<div><span>标签</span>19</div>
+		<div><span>分类</span>5</div>
+	</div>
+	<div class="kira-list">
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/"
+			title="回到首页"
+		>
+			<i
+				class="kirafont icon-home"
+			></i>
+			<div class="kira-list-item-content">回到首页</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/archive.html"
+			title="文章归档"
+		>
+			<i
+				class="kirafont icon-container"
+			></i>
+			<div class="kira-list-item-content">文章归档</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/about.html"
+			title="关于本人"
+		>
+			<i
+				class="kirafont icon-user"
+			></i>
+			<div class="kira-list-item-content">关于本人</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/friends.html"
+			title="我的朋友"
+		>
+			<i
+				class="kirafont icon-team"
+			></i>
+			<div class="kira-list-item-content">我的朋友</div>
+		</a>
+		
+	</div>
+	<aside id="kira-sidebar">
+		 <div class="kira-widget-wrap">
+	<div class="kira-widget kira-social">
+		<a
+			class="mdui-ripple"
+			href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=1106187173&website=www.oicqzone.com"
+			target="_blank"
+			mdui-tooltip="{content: 'QQ'}"
+			style="
+				color: rgb(49, 174, 255);
+				background-color: rgba(49, 174, 255, .1);
+			"
+		>
+			<i
+				class="kirafont icon-QQ"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://space.bilibili.com/2106744"
+			target="_blank"
+			mdui-tooltip="{content: '哔哩哔哩'}"
+			style="
+				color: rgb(231, 106, 141);
+				background-color: rgba(231, 106, 141, .15);
+			"
+		>
+			<i
+				class="kirafont icon-bilibili"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://github.com/Chocolate-Black"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(25, 23, 23);
+				background-color: rgba(25, 23, 23, .15);
+			"
+		>
+			<i
+				class="kirafont icon-github"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://gitee.com/xu_jing_yu/"
+			target="_blank"
+			mdui-tooltip="{content: 'Gitee'}"
+			style="
+				color: rgb(165, 15, 15);
+				background-color: rgba(165, 15, 15, .15);
+			"
+		>
+			<i
+				class="kirafont icon-gitee"
+			></i> </a
+		>
+	</div>
+</div>
+  
+<div class="kira-widget-wrap">
+  <h3 class="kira-widget-title">分类</h3>
+  <div class="kira-widget">
+
+    <ul class="category-list">
+
+      
+
+
+      
+
+      
+
+      <li class="category-list-item">
+        <a class="category-list-link" href="/categories/同人/">同人</a>
+        <span class="category-list-count">1</span>
+      </li>
+
+      
+
+      <li class="category-list-item">
+        <a class="category-list-link" href="/categories/我的项目/">我的项目</a>
+        <span class="category-list-count">1</span>
+      </li>
+
+      
+
+      <li class="category-list-item">
+        <a class="category-list-link" href="/categories/技术教程/">技术教程</a>
+        <span class="category-list-count">4</span>
+      </li>
+
+      
+
+      <li class="category-list-item">
+        <a class="category-list-link" href="/categories/经验分享/">经验分享</a>
+        <span class="category-list-count">2</span>
+      </li>
+
+      
+
+      <li class="category-list-item">
+        <a class="category-list-link" href="/categories/评测/">评测</a>
+        <span class="category-list-count">2</span>
+      </li>
+
+      
+    </ul>
+
+  </div>
+</div>
+  
+<div class="kira-widget-wrap">
+	<div id="randomtagcloud" class="kira-widget tagcloud kira-rainbow"><a href="/tags/AVG/" style="font-size: 20px;">AVG</a> <a href="/tags/CMVS-PMVS/" style="font-size: 10px;">CMVS-PMVS</a> <a href="/tags/C%E8%AF%AD%E8%A8%80/" style="font-size: 10px;">C语言</a> <a href="/tags/LSTM/" style="font-size: 15px;">LSTM</a> <a href="/tags/OpenMVG/" style="font-size: 10px;">OpenMVG</a> <a href="/tags/%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA/" style="font-size: 10px;">三维重建</a> <a href="/tags/%E4%B8%B0%E8%A3%95%E4%B9%8B%E8%A7%92/" style="font-size: 10px;">丰裕之角</a> <a href="/tags/%E4%BA%BA%E4%BD%93%E5%8A%A8%E4%BD%9C%E8%AF%86%E5%88%AB/" style="font-size: 10px;">人体动作识别</a> <a href="/tags/%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4/" style="font-size: 10px;">协同过滤</a> <a href="/tags/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">图神经网络</a> <a href="/tags/%E5%A4%8F%E4%BB%A4%E8%90%A5/" style="font-size: 10px;">夏令营</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 10px;">微信小程序</a> <a href="/tags/%E6%89%8B%E6%9C%BA%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">手机游戏</a> <a href="/tags/%E6%89%93%E5%81%87/" style="font-size: 10px;">打假</a> <a href="/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/" style="font-size: 15px;">推荐系统</a> <a href="/tags/%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F/" style="font-size: 10px;">明日方舟</a> <a href="/tags/%E6%B0%B4%E6%9C%88%E9%99%B5/" style="font-size: 10px;">水月陵</a> <a href="/tags/%E7%A7%8B%E4%B9%8B%E5%9B%9E%E5%BF%86/" style="font-size: 10px;">秋之回忆</a> <a href="/tags/%E9%9F%B3%E4%B9%90/" style="font-size: 10px;">音乐</a></div>
+	
+</div>
+
+ 
+	</aside>
+	<div class="kira-copyright">
+		&copy; 2023
+		<a href="/">John Doe</a
+		>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> &
+		<!-- TODO: github 链接 -->
+		<a href="https://github.com/ch1ny/kira-hexo/" target="_blank">Kira-Hexo</a>
+		<br />
+		
+			<a href="https://beian.miit.gov.cn/" target="_blank">赣ICP备******号</a>
+		
+		
+	</div>
+</div>
+<div class="kira-sidebar-modal" id="sidebar-modal" onclick="(function(self) {
+	self.classList.remove('show');
+	document.querySelector('.kira-sidebar.show#sidebar').classList.remove('show');
+})(this)"></div>
+			<div class="kira-content">
+				<div id="kira-top-header"></div>
+				<div class="kira-main-content">
+					
+<link rel="stylesheet" href="/css/kira-image.css">
+
+<script src="/js/kira-image.js"></script>
+<div class="kira-image">
+    <div class="kira-image-modal">
+        <div class="kira-image-header">
+            <div class="kira-image-counter"></div>
+            <div class="kira-image-title"></div>
+            <div class="kira-image-operation">
+                <div class="kira-image-operation-button" id="kira-image-operation-button-zoom">
+                    <i class="kirafont icon-zoom-in"></i>
+                </div>
+                <div class="kira-image-operation-button" id="kira-image-operation-button-close">
+                    <i class="kirafont icon-close"></i>
+                </div>
+            </div>
+        </div>
+        <div class="kira-image-container">
+            <div class="kira-image-prev-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-left"></i>
+                </div>
+            </div>
+            <div class="kira-image-list">
+                <div class="kira-image-prev">
+                    <img />
+                </div>
+                <div class="kira-image-now">
+                    <img />
+                </div>
+                <div class="kira-image-next">
+                    <img />
+                </div>
+            </div>
+            <div class="kira-image-next-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="kira-post">
+	<article>
+		
+		<div class="kira-post-cover">
+			<img
+				data-src="https://cdn.jsdelivr.net/gh/Chocolate-Black/pictureCDN/img/v2-c3134d705cf89f1ab20b0ecc638e999d_1440w.png"
+				data-sizes="auto"
+				alt="明日方舟精二Box推荐器：罗德岛之心，项目心得与经验"
+				class="lazyload kira-post-cover-image disabled-kira-image"
+			/>
+			<h1>明日方舟精二Box推荐器：罗德岛之心，项目心得与经验</h1>
+		</div>
+		
+		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
+			<a><i class="kirafont icon-calendar-fill"></i>2021年02月01日</a>
+			<a><i class="kirafont icon-areachart"></i>6.1k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 27 分钟</a>
+		</div>
+		<p>罗德岛之心PC端测试版程序已经发布，具体可以看NGA的帖子：</p>
+<p>[<a href="https://link.zhihu.com/?target=https://bbs.nga.cn/read.php?tid=25355097">罗德岛之心]萌新之友，精二Box推荐器PC端测试版发布！bbs.nga.cn&#x2F;read.php?tid&#x3D;25355097</a></p>
+<p>Github链接，如果你觉得对你有帮助的话，还请顺手点一颗星~：</p>
+<p><a href="https://link.zhihu.com/?target=https://github.com/Chocolate-Black/RhodeIslandHeartProject">https://github.com/Chocolate-Black/RhodeIslandHeartProjectgithub.com/Chocolate-Black/RhodeIslandHeartProject</a></p>
+<hr>
+<p>优先精二哪些干员，一直是困扰明日方舟萌新的一大问题。通常来说，萌新会选择在网上发帖求助，或者是在B站等平台寻找节奏榜等，以得到自己想要的答案。然而，发帖求助往往需要等待一段时间才能得到回复；而节奏榜只展现干员强度，<strong>并不能给出精二顺序的建议</strong>。</p>
+<p>于是，我希望用人工智能学习经验丰富的玩家的建议，做成一个网站工具，萌新只需将自己的阵容box上传，便可以得到建议精二的干员及其精二优先度顺序。</p>
+<p>从2020年7月13日在NGA发帖到现在，经过近半年的时间（其实中间鸽了一段时间orz……），罗德岛之心明日方舟BOX推荐器终于大功告成！下面我将分享我的经历与经验心得，希望能对各位有所帮助。</p>
+<h2><span id="一-问题分析干员box与推荐系统"><strong>一、问题分析：干员Box与推荐系统</strong></span></h2><p>在开始之前，首先要分析Box推荐这一问题的本质。</p>
+<p>输入是玩家的干员Box，Box由多个干员构成，输出是干员的排序。实际上，这一问题可以通过LTR算法解决。</p>
+<p>LTR，全称为Learning To Rank，顾名思义，这一种（类）学习如何排序的算法。LTR算法在我们日常生活中的应用非常广泛，其中最重要的一个应用就是推荐系统。淘宝的商品推荐，知乎、B站等平台的内容推荐等等，几乎都离不开LTR算法。</p>
+<p>为了更好地理解LTR算法，我们以电商平台为例进行讲解。用户在搜索栏输入关键词后，会出现一系列相关商品。用户输入的关键词就是<strong>Query</strong>，与关键词相关的商品就是<strong>Document</strong>。我们希望让用户最感兴趣的商品排在前面，从而提升用户体验。LTR算法的作用就是在用户输入关键词（Query）后，对所有与关键词相关的商品（Document）进行排序，让最满足用户需求的商品尽可能地排在前面。</p>
+<p>那么干员Box推荐与电商平台的推荐系统有什么相似之处呢？其实，<strong>玩家上传的Box就可以看作是一个Query，Box里的干员就可以看作是Document</strong>。我们的目标就是对Box里的所有干员进行评分，<strong>评分越高的干员越值得优先精二</strong>。</p>
+<h2><span id="二-数据采集小程序与云开发"><strong>二、数据采集：小程序与云开发</strong></span></h2><p>在理清思路后，接下来要做的就是采集数据。首先，我们要确定采集什么样的数据——很明显，是box里每个干员的信息（干员自身属性及等级），不过还不够。我们知道监督学习需要有目标值，在box干员推荐这一问题中，目标值是干员的优先度——那么优先度该如何规定呢？</p>
+<p>由于我准备用pair-wise的方式（后面会介绍）构建模型，因此一开始我把精二优先度划分为5个等级：最值得优先精二的干员，精二优先度较高的干员，可以延后考虑精二的干员，可选择性精二的干员以及无需精二的干员（含已精二干员）。后来在数据处理的过程中发现，由于<strong>玩家更看重前10个以内的干员的排序结果</strong>，因此可以延后考虑精二的干员和可选择性精二的干员这两个等级可以合并，以提高模型的精度。</p>
+<p>此外，我把干员的等级划分成了4个等级区间，具体如下：</p>
+<ul>
+<li>0：未精一</li>
+<li>1：&lt;&#x3D;精一40级</li>
+<li>2：精一40级~精一满级</li>
+<li>3：已精二</li>
+</ul>
+<p>在确定优先度的划分以及采集数据的格式后，我们罗德岛之心项目组的小伙伴们一起开发了一个用于采集数据的微信小程序，类似于抽卡模拟器（可以在微信搜索ArkHeart）。这里我们选择的是<strong>云开发</strong>模式，它非常适合个人以及小团队，其优点具体如下：</p>
+<ul>
+<li>基本无需后端，开发方便；</li>
+<li>云开发可以提供一个额度限定内免费的数据库，如果要采集的数据不多，平日流量不大，那么云开发绝对是不二之选。</li>
+</ul>
+<p>在开发完用于采集数据的小程序后，我再次在NGA发帖，寻求经验丰富的玩家志愿者帮助采集数据。为了保证玩家给出建议的质量，我设置的要求是博士等级必须大于等于70级。最后，我们总共采集了1300多份box，数据记录在6w多条。</p>
+<p>采集的数据格式如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>	<span class="hljs-attr">&quot;_id&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;1b64dd7b5f6a202f004c10b1321f4de4&quot;</span><span class="hljs-punctuation">,</span><br>	<span class="hljs-attr">&quot;time&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1600790575457</span><span class="hljs-punctuation">,</span><br>	<span class="hljs-attr">&quot;box&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span><span class="hljs-punctuation">&#123;</span><span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">277</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;阿消&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;chs&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;unchosen&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;class&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;特种&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;level&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">0</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;star&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">4</span><span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span>			<span class="hljs-punctuation">&#123;</span><span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">187</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;嘉维尔&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;chs&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;unchosen&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;class&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;医疗&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;level&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">1</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;star&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">4</span><span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span>			<span class="hljs-punctuation">&#123;</span><span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">198</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;讯使&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;chs&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;unchosen&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;class&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;先锋&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;level&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">2</span><span class="hljs-punctuation">,</span><span class="hljs-attr">&quot;star&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-number">4</span><span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">]</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h2><span id="三-模型构建特征工程与lgb"><strong>三、模型构建：特征工程与LGB</strong></span></h2><p>在采集完数据后，接下来要做的就是先确定使用什么样的模型。之前提到的LTR算法共有三大类：Pointwise类、Pairwise类以及Listwise类。Pointwise类算法把排序问题近似转换为回归问题，<strong>只考虑单一文档，而不考虑文档之间的关系</strong>；Pairwise类算法强调<strong>文档顺序关系</strong>，把排序问题近似为分类问题；而Listwise类算法则是直接优化排序列表，输入为单条样本为一个<strong>文档排列</strong>。</p>
+<p>前两类算法用的比较广泛，这里我选用Pairwise类算法，构建GBRT+LR模型。这里就不展开讲原理了，有兴趣的可以自己在知乎或者csdn等平台搜一下，或是看文末的参考资料。</p>
+<p>在训练模型之前，还有一项重要任务——<strong>特征工程</strong>。特征工程对于机器学习至关重要，很大程度上决定了模型的上限。</p>
+<p><strong>首先，我们要对数据进行清洗。</strong> 这里一开始我犯了个大错误，对于小程序采集到的数据过于自信，觉得没有必要从头到尾对数据进行清洗。但实际上，系统采集到的数据很脏！有的box因为系统bug只有一个干员被选中或者重复出现，有的box因为某些厨力玩家显得特别离谱（例如蜜蜡优先度高于塞雷娅……），还有的可能是因为侠客导致某些幻神干员明明没精二却没有被选择。这些数据无疑会影响到模型的训练（实际上我在对数据完全清洗后，ndcg指标上升了5个百分点），因此我们必须要进行清洗！我的做法是，把某些系统问题或者选的过于离谱的box直接删除，而剩余一些存在侠客因素或者问题不是很大的box，我个人凭借着玩家经验做了些许修改。</p>
+<p>之后，我们要确定选取哪些特征，这些特征要尽可能地与因变量有关。我们采集的数据，仅仅有干员名称、干员星级、干员等级、干员职业以及人工标注的优先度。这些特征还远远不够。<strong>并且，我们不能把干员名称作为特征——因为明日方舟的卡池是在不断更新的。</strong>如果把干员名称作为特征，那么每次出新干员，数据就得重新采集，模型就得重新训练，泛化能力非常差。</p>
+<p>那么该选取什么特征呢？比较好想到的是干员的公招标签。此外，我们可以想一下我们是如何给萌新推荐干员的。</p>
+<p><strong>首先，我们重点关注干员的自身定位以及其强度。</strong> 这里的干员定位我们可以用子职业来表示，比如说：技能回费先锋&#x2F;杀回先锋&#x2F;投锋，普通盾&#x2F;奶盾等。干员强度我们可以用单值离散变量来表示，0代表很弱，1代表弱，2代表强，3代表很强。</p>
+<p><strong>其次，我们会考虑整个Box里不同定位干员的练度比例</strong>。比如：如果萌新有一个精二的能天使，那么蓝毒、白金等五星对空狙的精二优先度就会小一些。</p>
+<p>因此，这里我增加了子职业以及各个子职业练度比例的特征。首先子职业的划分如下：</p>
+<ul>
+<li>先锋0：挡二先锋0，杀回先锋1，投锋2</li>
+<li>近卫1：挡一近卫3，挡二近卫4，群卫5，远卫6</li>
+<li>狙击2：快狙7，群狙8，超远狙9，特殊狙10</li>
+<li>重装3：盾11</li>
+<li>医疗4：群奶12，单奶13</li>
+<li>辅助5：减速14，召唤15</li>
+<li>术士6：单法16，群法17</li>
+<li>特种7：快活18，推拉19</li>
+<li>单独的特殊类：20</li>
+</ul>
+<p>有人可能会问：你这分的不对啊？近卫里面还有法伤近卫，盾里面还有奶盾，你这分的不够细啊。实际上，子职业并不是分的越细越好，如果分的过细，那么很容易出现类别之间的样本数量过于失衡的情况，影响模型的精度。比方说，奶盾与普通盾，其实可以靠“治疗”标签区分，因此无需过于细分子职业类别。</p>
+<p>那么怎么确定分的好不好呢？一方面我们可以看评价模型的指标——NDCG的大小。NDCG介于0~1之间，越接近于1，说明模型分类越精确。</p>
+<p>除了NDCG之外，还有NDCG@k，k是人为设定的整数值。这两者分别有什么含义呢？简单讲，NDCG和NDCG@k都是评判一个模型排序正确程度的指标，<strong>区别在于，NDCG看的是所有item也就是doc的排序正确程度，而NDCG@k只关心排名前k个文档的排序正确程度。</strong>这里我遇到了一个坑。一开始，我想当然地以为，由于玩家重点关注前10个干员的排序，因此优化指标就设为NDCG@10。然而，这样训练出来的模型，虽说在预测6星干员方面效果很不错，但对于某些好用低星干员，以及已有同类高练干员无需再练同类干员的情况下，效果不是很理想。原因在于：优先度为4，3的干员在前10位占据了绝大多数位置，然而在整个box中，优先度为2，1的干员才是多数。NDCG@k的k设的过于靠前，会让一些强力干员的优先度过高，以至于在某些特殊场合下（例如拥有精二蓝毒和一个精一40级白金）下，本应是某些较为适合box但本身强度不是特别高的干员的优先度较低，而让一些强度较高但已有同类替代的干员优先度较高。因此，NDCG@k中的k不可以过小。最后我选取了NDCG@30，效果不错。</p>
+<p>另一方面，我们可以看特征重要度。在训练完树模型后，我们可以查看模型里各个特征的重要性——某个特征的重要性越高，就说明该特征在模型训练中发挥了越重要的作用，反之亦然。</p>
+<p>经过反复尝试，我选取了上述的干员子职业分类方式，并去除了群攻、位移、费用回复、支援机械、快速复活、召唤等标签。</p>
+<p>此外，干员子职业练度比例的计算公式如下：</p>
+<p>某子职业练度比例干员强度属于该子职业干员等级区间所有子职业练度和某子职业练度比例&#x3D;∑(干员强度&#x2F;3)∗(属于该子职业干员等级区间&#x2F;3)所有子职业练度和</p>
+<p>同一Box下的干员共享子职业练度比例的特征。</p>
+<h2><span id="四-代码讲解"><strong>四、代码讲解</strong></span></h2><p>GBRT+LR的pairwise类算法，我们可以用LGB去做。这里必须吹一下LGB，又快又准！</p>
+<p>下面开始详细讲解一下代码（部分代码参考了<a href="https://link.zhihu.com/?target=https://github.com/jiangnanboy/learning_to_rank">https://github.com/jiangnanboy/learning_to_rank</a>）。</p>
+<p>首先，我们需要加载已经处理过的表格数据：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>np.random.seed(<span class="hljs-number">233</span>) <span class="hljs-comment"># 设置种子</span><br>df = pd.read_excel(<span class="hljs-string">&#x27;./data.xlsx&#x27;</span>)<br><span class="hljs-built_in">print</span>(df)<br></code></pre></td></tr></table></figure>
+
+<p>接下来，我们需要把整个数据集划分为训练集、验证集和测试集。这里的比例约为7：2：1。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">qid</span>(<span class="hljs-params"><span class="hljs-built_in">id</span></span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    输入表格数据的qid（query id）列，转换为符合lgb模型的格式</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    num = <span class="hljs-built_in">id</span>[<span class="hljs-number">0</span>]<br>    counts = <span class="hljs-number">0</span><br>    group_ids = []<br>    <span class="hljs-keyword">for</span> new_num <span class="hljs-keyword">in</span> <span class="hljs-built_in">id</span>:<br>        <span class="hljs-keyword">if</span> new_num == num:<br>            counts +=<span class="hljs-number">1</span><br>        <span class="hljs-keyword">else</span>:<br>            num = new_num<br>            group_ids.append(counts)<br>            counts = <span class="hljs-number">1</span><br>    group_ids.append(counts)<br>    <span class="hljs-keyword">return</span> group_ids<br><br><br>qid_set = <span class="hljs-built_in">set</span>(df[<span class="hljs-string">&#x27;qid&#x27;</span>]) <span class="hljs-comment"># 获取qid（query id）集合</span><br>qid_li = <span class="hljs-built_in">list</span>(qid_set)<br>test_size = <span class="hljs-built_in">int</span>(<span class="hljs-built_in">len</span>(qid_li)*<span class="hljs-number">0.1</span>) <span class="hljs-comment"># 获得测试集大小</span><br><br><span class="hljs-comment"># 筛除掉精二干员，精二干员不参与模型训练</span><br>level_li = [<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>]<br>df = df[df[<span class="hljs-string">&#x27;level&#x27;</span>].isin(level_li)]<br><br><span class="hljs-comment"># 数据集划分，X代表输入的特征，y代表目标值（相关度）</span><br>test_li = np.random.choice(qid_li,size=test_size,replace=<span class="hljs-literal">False</span>)<br>test_set = <span class="hljs-built_in">set</span>(test_li)<br><br>train_set = qid_set.difference(test_set)<br>train_li = <span class="hljs-built_in">list</span>(train_set)<br><br>val_size = <span class="hljs-built_in">int</span>(<span class="hljs-built_in">len</span>(train_li)*<span class="hljs-number">0.2</span>)<br>val_li = np.random.choice(train_li,size=val_size,replace=<span class="hljs-literal">False</span>)<br>val_set = <span class="hljs-built_in">set</span>(val_li)<br><br>train_set = train_set.difference(val_set)<br>train_li = <span class="hljs-built_in">list</span>(train_set)<br><br>train_data = df[df[<span class="hljs-string">&#x27;qid&#x27;</span>].isin(train_li)]<br>val_data = df[df[<span class="hljs-string">&#x27;qid&#x27;</span>].isin(val_li)]<br>test_data = df[df[<span class="hljs-string">&#x27;qid&#x27;</span>].isin(test_li)]<br><br>data = train_data.values<br>len_v = <span class="hljs-built_in">len</span>(data[<span class="hljs-number">0</span>])<br>train_y = data[:,-<span class="hljs-number">1</span>]<br>train_X = data[:,<span class="hljs-number">1</span>:len_v-<span class="hljs-number">1</span>]<br>train_qid = data[:,<span class="hljs-number">0</span>]<br>train_qid = train_qid.astype(<span class="hljs-built_in">int</span>)<br>train_qid = qid(train_qid)<br>train_y = train_y.astype(<span class="hljs-built_in">int</span>)<br><br>data2 = test_data.values<br>len_v = <span class="hljs-built_in">len</span>(data2[<span class="hljs-number">0</span>])<br>test_y = data2[:,-<span class="hljs-number">1</span>]<br>test_X = data2[:,<span class="hljs-number">1</span>:len_v-<span class="hljs-number">1</span>]<br>test_qid = data2[:,<span class="hljs-number">0</span>]<br>test_qid = test_qid.astype(<span class="hljs-built_in">int</span>)<br>test_y = test_y.astype(<span class="hljs-built_in">int</span>)<br><br>data3 = val_data.values<br>len_v = <span class="hljs-built_in">len</span>(data3[<span class="hljs-number">0</span>])<br>val_y = data3[:,-<span class="hljs-number">1</span>]<br>val_X = data3[:,<span class="hljs-number">1</span>:len_v-<span class="hljs-number">1</span>]<br>val_qid = data3[:,<span class="hljs-number">0</span>]<br>val_qid = val_qid.astype(<span class="hljs-built_in">int</span>)<br>val_qid = qid(val_qid)<br>val_y = val_y.astype(<span class="hljs-built_in">int</span>)<br></code></pre></td></tr></table></figure>
+
+<p>之后我们把训练集和验证集的数据加载为LGB的格式。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> lightgbm <span class="hljs-keyword">as</span> lgb<br><br>train_data = lgb.Dataset(train_X, label=train_y, group=train_qid,feature_name=[<span class="hljs-string">&#x27;star&#x27;</span>,<span class="hljs-string">&#x27;level&#x27;</span>,<span class="hljs-string">&#x27;class&#x27;</span>,<span class="hljs-string">&#x27;subclass&#x27;</span>,<span class="hljs-string">&#x27;power&#x27;</span>,<br>            <span class="hljs-string">&#x27;是否具有治疗&#x27;</span>,<span class="hljs-string">&#x27;是否具有支援&#x27;</span>,<span class="hljs-string">&#x27;是否具有输出&#x27;</span>,<br>            <span class="hljs-string">&#x27;是否具有减速&#x27;</span>,<span class="hljs-string">&#x27;是否具有生存&#x27;</span>,<span class="hljs-string">&#x27;是否具有防护&#x27;</span>,<span class="hljs-string">&#x27;是否具有削弱&#x27;</span>,<br>            <span class="hljs-string">&#x27;是否具有控场&#x27;</span>,<span class="hljs-string">&#x27;是否具有爆发&#x27;</span>,<br>            <span class="hljs-string">&#x27;挡二先锋练度比例&#x27;</span>,<span class="hljs-string">&#x27;杀回先锋练度比例&#x27;</span>,<span class="hljs-string">&#x27;投锋练度比例&#x27;</span>,<br>            <span class="hljs-string">&#x27;挡一近卫练度比例&#x27;</span>,<span class="hljs-string">&#x27;挡二近卫练度比例&#x27;</span>,<span class="hljs-string">&#x27;群体近卫练度比例&#x27;</span>,<br>            <span class="hljs-string">&#x27;远卫练度比例&#x27;</span>,<span class="hljs-string">&#x27;快狙练度比例&#x27;</span>,<span class="hljs-string">&#x27;群狙练度比例&#x27;</span>,<span class="hljs-string">&#x27;超远狙练度比例&#x27;</span>,<br>            <span class="hljs-string">&#x27;特殊狙练度比例&#x27;</span>,<span class="hljs-string">&#x27;盾练度比例&#x27;</span>,<span class="hljs-string">&#x27;群奶练度比例&#x27;</span>,<span class="hljs-string">&#x27;单奶练度比例&#x27;</span>,<br>            <span class="hljs-string">&#x27;减速练度比例&#x27;</span>,<span class="hljs-string">&#x27;召唤练度比例&#x27;</span>,<span class="hljs-string">&#x27;单法练度比例&#x27;</span>,<br>            <span class="hljs-string">&#x27;群法练度比例&#x27;</span>,<span class="hljs-string">&#x27;快活练度比例&#x27;</span>,<span class="hljs-string">&#x27;推拉练度比例&#x27;</span>,<span class="hljs-string">&#x27;特殊干员练度比例&#x27;</span>],<br>                         categorical_feature=[<span class="hljs-string">&#x27;star&#x27;</span>,<span class="hljs-string">&#x27;level&#x27;</span>,<span class="hljs-string">&#x27;class&#x27;</span>,<span class="hljs-string">&#x27;subclass&#x27;</span>,<span class="hljs-string">&#x27;power&#x27;</span>])<br><br>val_data = lgb.Dataset(val_X, label=val_y, group=val_qid,feature_name=[<span class="hljs-string">&#x27;star&#x27;</span>,<span class="hljs-string">&#x27;level&#x27;</span>,<span class="hljs-string">&#x27;class&#x27;</span>,<span class="hljs-string">&#x27;subclass&#x27;</span>,<span class="hljs-string">&#x27;power&#x27;</span>,<br>            <span class="hljs-string">&#x27;是否具有治疗&#x27;</span>,<span class="hljs-string">&#x27;是否具有支援&#x27;</span>,<span class="hljs-string">&#x27;是否具有输出&#x27;</span>,<br>            <span class="hljs-string">&#x27;是否具有减速&#x27;</span>,<span class="hljs-string">&#x27;是否具有生存&#x27;</span>,<span class="hljs-string">&#x27;是否具有防护&#x27;</span>,<span class="hljs-string">&#x27;是否具有削弱&#x27;</span>,<br>            <span class="hljs-string">&#x27;是否具有控场&#x27;</span>,<span class="hljs-string">&#x27;是否具有爆发&#x27;</span>,<br>            <span class="hljs-string">&#x27;挡二先锋练度比例&#x27;</span>,<span class="hljs-string">&#x27;杀回先锋练度比例&#x27;</span>,<span class="hljs-string">&#x27;投锋练度比例&#x27;</span>,<br>            <span class="hljs-string">&#x27;挡一近卫练度比例&#x27;</span>,<span class="hljs-string">&#x27;挡二近卫练度比例&#x27;</span>,<span class="hljs-string">&#x27;群体近卫练度比例&#x27;</span>,<br>            <span class="hljs-string">&#x27;远卫练度比例&#x27;</span>,<span class="hljs-string">&#x27;快狙练度比例&#x27;</span>,<span class="hljs-string">&#x27;群狙练度比例&#x27;</span>,<span class="hljs-string">&#x27;超远狙练度比例&#x27;</span>,<br>            <span class="hljs-string">&#x27;特殊狙练度比例&#x27;</span>,<span class="hljs-string">&#x27;盾练度比例&#x27;</span>,<span class="hljs-string">&#x27;群奶练度比例&#x27;</span>,<span class="hljs-string">&#x27;单奶练度比例&#x27;</span>,<br>            <span class="hljs-string">&#x27;减速练度比例&#x27;</span>,<span class="hljs-string">&#x27;召唤练度比例&#x27;</span>,<span class="hljs-string">&#x27;单法练度比例&#x27;</span>,<br>            <span class="hljs-string">&#x27;群法练度比例&#x27;</span>,<span class="hljs-string">&#x27;快活练度比例&#x27;</span>,<span class="hljs-string">&#x27;推拉练度比例&#x27;</span>,<span class="hljs-string">&#x27;特殊干员练度比例&#x27;</span>],<br>                         categorical_feature=[<span class="hljs-string">&#x27;star&#x27;</span>,<span class="hljs-string">&#x27;level&#x27;</span>,<span class="hljs-string">&#x27;class&#x27;</span>,<span class="hljs-string">&#x27;subclass&#x27;</span>,<span class="hljs-string">&#x27;power&#x27;</span>])<br></code></pre></td></tr></table></figure>
+
+<p>之后设置参数，进行训练，并保存模型。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#参数已经调过参</span><br>params = &#123;<br>    <span class="hljs-string">&#x27;task&#x27;</span>: <span class="hljs-string">&#x27;train&#x27;</span>,  <span class="hljs-comment"># 执行的任务类型</span><br>    <span class="hljs-string">&#x27;boosting_type&#x27;</span>: <span class="hljs-string">&#x27;gbrt&#x27;</span>,  <span class="hljs-comment"># 基学习器</span><br>    <span class="hljs-string">&#x27;objective&#x27;</span>: <span class="hljs-string">&#x27;lambdarank&#x27;</span>,  <span class="hljs-comment"># 排序任务(目标函数)</span><br>    <span class="hljs-string">&#x27;metric&#x27;</span>: <span class="hljs-string">&#x27;ndcg&#x27;</span>,  <span class="hljs-comment"># 度量的指标(评估函数)</span><br>    <span class="hljs-string">&#x27;metric_freq&#x27;</span>: <span class="hljs-number">1</span>,  <span class="hljs-comment"># 每隔多少次输出一次度量结果</span><br>    <span class="hljs-string">&#x27;train_metric&#x27;</span>: <span class="hljs-literal">True</span>,  <span class="hljs-comment"># 训练时就输出度量结果</span><br>    <span class="hljs-string">&#x27;ndcg_at&#x27;</span>: [<span class="hljs-number">30</span>],<span class="hljs-comment"># 设ndcg@30用于优化模型</span><br>    <span class="hljs-string">&#x27;max_bin&#x27;</span>: <span class="hljs-number">255</span>,  <span class="hljs-comment"># 一个整数，表示最大的桶的数量。默认值为 255。lightgbm 会根据它来自动压缩内存。如max_bin=255 时，则lightgbm 将使用uint8 来表示特征的每一个值。</span><br>    <span class="hljs-string">&#x27;num_iterations&#x27;</span>: <span class="hljs-number">400</span>,  <span class="hljs-comment"># 迭代次数，即生成的树的棵数</span><br>    <span class="hljs-string">&#x27;learning_rate&#x27;</span>: <span class="hljs-number">0.05</span>,  <span class="hljs-comment"># 学习率</span><br>    <span class="hljs-string">&#x27;num_leaves&#x27;</span>: <span class="hljs-number">45</span>,  <span class="hljs-comment"># 叶子数</span><br>    <span class="hljs-string">&#x27;tree_learner&#x27;</span>: <span class="hljs-string">&#x27;serial&#x27;</span>,  <span class="hljs-comment"># 用于并行学习，‘serial’： 单台机器的tree learner</span><br>    <span class="hljs-string">&#x27;nthread&#x27;</span>: <span class="hljs-number">12</span>, <span class="hljs-comment"># 线程数</span><br>    <span class="hljs-string">&#x27;min_data_in_leaf&#x27;</span>: <span class="hljs-number">1</span>,  <span class="hljs-comment"># 一个叶子节点上包含的最少样本数量</span><br>    <span class="hljs-string">&#x27;feature_fraction&#x27;</span>: <span class="hljs-number">0.7</span>, <span class="hljs-comment"># 每次迭代中随机选择70%的参数来建树，用于抑制过拟合</span><br>    <span class="hljs-string">&#x27;bagging_fraction&#x27;</span>: <span class="hljs-number">0.65</span>, <span class="hljs-comment"># 每次迭代时用的数据比例，用于抑制过拟合</span><br>    <span class="hljs-string">&#x27;bagging_freq&#x27;</span> : <span class="hljs-number">4</span>, <span class="hljs-comment"># 意味着每 7 次迭代执行bagging</span><br>    <span class="hljs-string">&#x27;verbose&#x27;</span>: <span class="hljs-number">2</span>  <span class="hljs-comment"># 显示训练时的信息</span><br>&#125;<br>gbm = lgb.train(params, train_data, valid_sets=[val_data],feature_name=[<span class="hljs-string">&#x27;star&#x27;</span>,<span class="hljs-string">&#x27;level&#x27;</span>,<span class="hljs-string">&#x27;class&#x27;</span>,<span class="hljs-string">&#x27;subclass&#x27;</span>,<span class="hljs-string">&#x27;power&#x27;</span>,<br>            <span class="hljs-string">&#x27;是否具有治疗&#x27;</span>,<span class="hljs-string">&#x27;是否具有支援&#x27;</span>,<span class="hljs-string">&#x27;是否具有输出&#x27;</span>,<br>            <span class="hljs-string">&#x27;是否具有减速&#x27;</span>,<span class="hljs-string">&#x27;是否具有生存&#x27;</span>,<span class="hljs-string">&#x27;是否具有防护&#x27;</span>,<span class="hljs-string">&#x27;是否具有削弱&#x27;</span>,<br>            <span class="hljs-string">&#x27;是否具有控场&#x27;</span>,<span class="hljs-string">&#x27;是否具有爆发&#x27;</span>,<br>            <span class="hljs-string">&#x27;挡二先锋练度比例&#x27;</span>,<span class="hljs-string">&#x27;杀回先锋练度比例&#x27;</span>,<span class="hljs-string">&#x27;投锋练度比例&#x27;</span>,<br>            <span class="hljs-string">&#x27;挡一近卫练度比例&#x27;</span>,<span class="hljs-string">&#x27;挡二近卫练度比例&#x27;</span>,<span class="hljs-string">&#x27;群体近卫练度比例&#x27;</span>,<br>            <span class="hljs-string">&#x27;远卫练度比例&#x27;</span>,<span class="hljs-string">&#x27;快狙练度比例&#x27;</span>,<span class="hljs-string">&#x27;群狙练度比例&#x27;</span>,<span class="hljs-string">&#x27;超远狙练度比例&#x27;</span>,<br>            <span class="hljs-string">&#x27;特殊狙练度比例&#x27;</span>,<span class="hljs-string">&#x27;盾练度比例&#x27;</span>,<span class="hljs-string">&#x27;群奶练度比例&#x27;</span>,<span class="hljs-string">&#x27;单奶练度比例&#x27;</span>,<br>            <span class="hljs-string">&#x27;减速练度比例&#x27;</span>,<span class="hljs-string">&#x27;召唤练度比例&#x27;</span>,<span class="hljs-string">&#x27;单法练度比例&#x27;</span>,<br>            <span class="hljs-string">&#x27;群法练度比例&#x27;</span>,<span class="hljs-string">&#x27;快活练度比例&#x27;</span>,<span class="hljs-string">&#x27;推拉练度比例&#x27;</span>,<span class="hljs-string">&#x27;特殊干员练度比例&#x27;</span>],<br>                         categorical_feature=[<span class="hljs-string">&#x27;star&#x27;</span>,<span class="hljs-string">&#x27;level&#x27;</span>,<span class="hljs-string">&#x27;class&#x27;</span>,<span class="hljs-string">&#x27;subclass&#x27;</span>,<span class="hljs-string">&#x27;power&#x27;</span>])<br><br>gbm.save_model(<span class="hljs-string">&#x27;./model/model.txt&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>最后，我们可以在测试集上进行检验，并显示特征重要度。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> collections<br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> sys<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">predict</span>(<span class="hljs-params">x_test, comments, model_input_path</span>):<br>    <span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">    预测得分并排序</span><br><span class="hljs-string">    &#x27;&#x27;&#x27;</span><br>    gbm = lgb.Booster(model_file=model_input_path)  <span class="hljs-comment"># 加载model</span><br><br>    ypred = gbm.predict(x_test)<br><br>    predicted_sorted_indexes = np.argsort(ypred)[::-<span class="hljs-number">1</span>]  <span class="hljs-comment"># 返回从大到小的索引</span><br><br>    t_results = comments[predicted_sorted_indexes]  <span class="hljs-comment"># 返回对应的comments,从大到小的排序</span><br><br>    <span class="hljs-keyword">return</span> t_results<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">validate</span>(<span class="hljs-params">qids, targets, preds, k</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    qids:数据里的QueryID</span><br><span class="hljs-string">    targets:目标值，真实值</span><br><span class="hljs-string">    preds:预测值</span><br><span class="hljs-string">    k: ndcg@k 里的k</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    query_groups = get_groups(qids)  <span class="hljs-comment"># (qid,from,to),一个元组,表示这个qid的样本从哪到哪</span><br>    all_ndcg = []<br>    every_qid_ndcg = collections.OrderedDict()<br><br>    <span class="hljs-keyword">for</span> qid, a, b <span class="hljs-keyword">in</span> query_groups:<br>        predicted_sorted_indexes = np.argsort(preds[a:b])[::-<span class="hljs-number">1</span>] <span class="hljs-comment"># 从大到小的索引</span><br>        t_results = targets[a:b] <span class="hljs-comment"># 目标数据的相关度</span><br>        t_results = t_results[predicted_sorted_indexes] <span class="hljs-comment">#是predicted_sorted_indexes排好序的在test_data中的相关度</span><br>        dcg_val = dcg_k(t_results, k)<br>        idcg_val = ideal_dcg_k(t_results, k)<br>        ndcg_val = (dcg_val / idcg_val)<br>        all_ndcg.append(ndcg_val)<br>        every_qid_ndcg.setdefault(qid, ndcg_val)<br><br>    average_ndcg = np.nanmean(all_ndcg)<br>    <span class="hljs-keyword">return</span> average_ndcg, every_qid_ndcg<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_groups</span>(<span class="hljs-params">qids</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;Makes an iterator of query groups on the provided list of query ids.</span><br><span class="hljs-string"></span><br><span class="hljs-string">    Parameters</span><br><span class="hljs-string">    ----------</span><br><span class="hljs-string">    qids : array_like of shape = [n_samples]</span><br><span class="hljs-string">        List of query ids.</span><br><span class="hljs-string"></span><br><span class="hljs-string">    Yields</span><br><span class="hljs-string">    ------</span><br><span class="hljs-string">    row : (qid, int, int)</span><br><span class="hljs-string">        Tuple of query id, from, to.</span><br><span class="hljs-string">        ``[i for i, q in enumerate(qids) if q == qid] == range(from, to)``</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    prev_qid = <span class="hljs-literal">None</span><br>    prev_limit = <span class="hljs-number">0</span><br>    total = <span class="hljs-number">0</span><br><br>    <span class="hljs-keyword">for</span> i, qid <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(qids):<br>        total += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">if</span> qid != prev_qid:<br>            <span class="hljs-keyword">if</span> i != prev_limit:<br>                <span class="hljs-keyword">yield</span> (prev_qid, prev_limit, i)<br>            prev_qid = qid<br>            prev_limit = i<br><br>    <span class="hljs-keyword">if</span> prev_limit != total:<br>        <span class="hljs-keyword">yield</span> (prev_qid, prev_limit, total)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">group_queries</span>(<span class="hljs-params">training_data, qid_index</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        Returns a dictionary that groups the documents by their query ids.</span><br><span class="hljs-string">        Parameters</span><br><span class="hljs-string">        ----------</span><br><span class="hljs-string">        training_data : Numpy array of lists</span><br><span class="hljs-string">            Contains a list of document information. Each document&#x27;s format is [relevance score, query index, feature vector]</span><br><span class="hljs-string">        qid_index : int</span><br><span class="hljs-string">            This is the index where the qid is located in the training data</span><br><span class="hljs-string"></span><br><span class="hljs-string">        Returns</span><br><span class="hljs-string">        -------</span><br><span class="hljs-string">        query_indexes : dictionary</span><br><span class="hljs-string">            The keys were the different query ids and teh values were the indexes in the training data that are associated of those keys.</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    query_indexes = &#123;&#125;  <span class="hljs-comment"># 每个qid对应的样本索引范围,比如qid=1020,那么此qid在training data中的训练样本从0到100的范围, &#123; key=str,value=[] &#125;</span><br>    index = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> record <span class="hljs-keyword">in</span> training_data:<br>        query_indexes.setdefault(record[qid_index], [])<br>        query_indexes[record[qid_index]].append(index)<br>        index += <span class="hljs-number">1</span><br>    <span class="hljs-keyword">return</span> query_indexes<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">dcg_k</span>(<span class="hljs-params">scores, k</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        Returns the DCG value of the list of scores and truncates to k values.</span><br><span class="hljs-string">        Parameters</span><br><span class="hljs-string">        ----------</span><br><span class="hljs-string">        scores : list</span><br><span class="hljs-string">            Contains labels in a certain ranked order</span><br><span class="hljs-string">        k : int</span><br><span class="hljs-string">            In the amount of values you want to only look at for computing DCG</span><br><span class="hljs-string"></span><br><span class="hljs-string">        Returns</span><br><span class="hljs-string">        -------</span><br><span class="hljs-string">        DCG_val: int</span><br><span class="hljs-string">            This is the value of the DCG on the given scores</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">return</span> np.<span class="hljs-built_in">sum</span>([<br>                      (np.power(<span class="hljs-number">2</span>, scores[i]) - <span class="hljs-number">1</span>) / np.log2(i + <span class="hljs-number">2</span>)<br>                      <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(scores[:k]))<br>                      ])<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">ideal_dcg_k</span>(<span class="hljs-params">scores, k</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    前k个理想状态下的dcg</span><br><span class="hljs-string">        Returns the Ideal DCG value of the list of scores and truncates to k values.</span><br><span class="hljs-string">        Parameters</span><br><span class="hljs-string">        ----------</span><br><span class="hljs-string">        scores : list</span><br><span class="hljs-string">            Contains labels in a certain ranked order</span><br><span class="hljs-string">        k : int</span><br><span class="hljs-string">            In the amount of values you want to only look at for computing DCG</span><br><span class="hljs-string"></span><br><span class="hljs-string">        Returns</span><br><span class="hljs-string">        -------</span><br><span class="hljs-string">        Ideal_DCG_val: int</span><br><span class="hljs-string">            This is the value of the Ideal DCG on the given scores</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-comment"># 相关度降序排序</span><br>    scores = [score <span class="hljs-keyword">for</span> score <span class="hljs-keyword">in</span> <span class="hljs-built_in">sorted</span>(scores)[::-<span class="hljs-number">1</span>]]<br>    <span class="hljs-keyword">return</span> dcg_k(scores, k)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">plot_print_feature_importance</span>(<span class="hljs-params">model_path</span>):<br>    <span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">    打印特征的重要度</span><br><span class="hljs-string">    &#x27;&#x27;&#x27;</span><br>    <span class="hljs-comment">#模型中的特征是Column_数字,这里打印重要度时可以映射到真实的特征名</span><br><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(model_path):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;file no exists! &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(model_path))<br>        sys.exit(<span class="hljs-number">0</span>)<br><br>    gbm = lgb.Booster(model_file=model_path)<br><br>    <span class="hljs-comment"># 打印和保存特征重要度</span><br>    importances = gbm.feature_importance(importance_type=<span class="hljs-string">&#x27;split&#x27;</span>)<br>    feature_names = gbm.feature_name()<br><br>    <span class="hljs-built_in">sum</span> = <span class="hljs-number">0.</span><br>    <span class="hljs-keyword">for</span> value <span class="hljs-keyword">in</span> importances:<br>        <span class="hljs-built_in">sum</span> += value<br><br>    importance_data = []<br>    head = [<span class="hljs-string">&#x27;特征&#x27;</span>,<span class="hljs-string">&#x27;重要度&#x27;</span>,<span class="hljs-string">&#x27;重要度比例&#x27;</span>]<br><br>    <span class="hljs-keyword">for</span> feature_name, importance <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(feature_names, importances):<br>        <span class="hljs-comment"># feat_id = int(feature_name.split(&#x27;_&#x27;)[1]) + 1</span><br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27; &#123;&#125; : &#123;&#125; : &#123;&#125;&#x27;</span>.<span class="hljs-built_in">format</span>(feature_name, importance, importance / <span class="hljs-built_in">sum</span>))<br>        row = [feature_name,importance,importance/<span class="hljs-built_in">sum</span>]<br>        importance_data.append(row)<br><br>    dff = pd.DataFrame(importance_data,columns=head)<br>    dff.to_csv(<span class="hljs-string">&#x27;./importance.csv&#x27;</span>,index=<span class="hljs-literal">False</span>)<br><br><span class="hljs-comment"># 预测</span><br>gbm = lgb.Booster(model_file=<span class="hljs-string">&#x27;./model/model.txt&#x27;</span>)<br>test_predict = gbm.predict(test_X)<br>average_ndcg, _ = validate(test_qid, test_y, test_predict, <span class="hljs-number">10</span>)<br><br><span class="hljs-comment"># 所有qid的平均ndcg</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;all qid average ndcg@10: &quot;</span>, average_ndcg)<br><br><span class="hljs-comment"># 保存特征重要度</span><br>plot_print_feature_importance(<span class="hljs-string">&#x27;./model/model.txt&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>最终我们的模型在测试集上的ndcg@10约为0.9237，效果不错。</p>
+<h2><span id="四-pc端的制作"><strong>四、PC端的制作</strong></span></h2><p>模型终归是模型，要想让用户使用，就必须做出可视化界面。目前我们和kkdy合作一起开发网页版和小程序，这几天寒假闲着没事，我自学了pyqt做了个桌面程序，实现了box推荐的功能。源代码已经放在了我的Github里：</p>
+<p><a href="https://link.zhihu.com/?target=https://github.com/Chocolate-Black/RhodeIslandHeartProject">https://github.com/Chocolate-Black/RhodeIslandHeartProjectgithub.com/Chocolate-Black/RhodeIslandHeartProject</a></p>
+<h2><span id="五-总结"><strong>五、总结</strong></span></h2><p>费时半年的项目（虽然鸽了一段时间orz），终于做完了！个人感觉用AI做这个罗德岛之心Box推荐系统并不是非常困难。实际上，罗德岛之心的这个模式可以同样套用在其他手游上，不过本人精力有限，就只做方舟的了。</p>
+<p>此外，这套干员推荐系统，稍作修改的话或许也可以用在肉鸽活动上，感觉可以一搞，不过现在思路还没完全确定，先等下一次肉鸽活动再说吧。</p>
+<p>如果你喜欢我的项目的话，还请到我的Github里点颗星，谢谢各位了~</p>
+<hr>
+<h3><span id="参考资料"><strong>参考资料</strong></span></h3><p>1.机器学习排序算法：RankNet to LambdaRank to LambdaMART: <a href="https://link.zhihu.com/?target=https://www.cnblogs.com/genyuan/p/9788294.html">https://www.cnblogs.com/genyuan/p/9788294.html</a></p>
+<p>2.利用lightGBM做LTR排序： <a href="https://link.zhihu.com/?target=https://github.com/jiangnanboy/learning_to_rank">https://github.com/jiangnanboy/learning_to_rank</a></p>
+<p>3.策略算法工程师之路-排序模型(LTR)及应用： <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/113302654">https://zhuanlan.zhihu.com/p/11</a></p>
+
+	</article>
+
+	 
+    <div class="kira-post-copyright">
+        <strong>Author：</strong>John Doe<br>
+        <strong>Link：</strong><a href="http://example.com/2021/02/01/%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F%E7%B2%BE%E4%BA%8CBox%E6%8E%A8%E8%8D%90%E5%99%A8%EF%BC%9A%E7%BD%97%E5%BE%B7%E5%B2%9B%E4%B9%8B%E5%BF%83%EF%BC%8C%E9%A1%B9%E7%9B%AE%E5%BF%83%E5%BE%97%E4%B8%8E%E7%BB%8F%E9%AA%8C/" title="http:&#x2F;&#x2F;example.com&#x2F;2021&#x2F;02&#x2F;01&#x2F;明日方舟精二Box推荐器：罗德岛之心，项目心得与经验&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;example.com&#x2F;2021&#x2F;02&#x2F;01&#x2F;明日方舟精二Box推荐器：罗德岛之心，项目心得与经验&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+  
+	<div class="kira-post-nav">
+		<nav class="post-nav">
+			                  
+			<!-- 先找到与当前文字相同的目录 -->
+			         
+			<!-- 在找到当前文章所在的 index -->
+			        
+			<!-- 上一篇文章 -->
+			<div class="old">
+				<span>上一章</span>
+				<a href="/2020/10/06/C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0LSTM%E7%AE%97%E6%B3%95/"> C语言实现LSTM算法</a>
+			</div>
+			       
+			<!-- 下一篇文章 -->
+			<div class="new">
+				<span>下一章</span>
+				<a href="/2021/06/21/Windows%E4%B8%8B%E9%85%8D%E7%BD%AEOpenMVG/"> Windows下配置OpenMVG+CMVS-PMVS</a>
+			</div>
+			                  
+			<!-- 先找到与当前文字相同的目录 -->
+			   
+			<!-- 在找到当前文章所在的 index -->
+			       
+			<!-- 下一篇文章 -->
+			<div class="new">
+				<span>下一章</span>
+				<a href="/2023/03/17/%E3%80%90%E5%9B%BE%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E3%80%91%E5%AF%B9%E9%A1%B6%E4%BC%9A%E8%AE%BA%E6%96%87HCCF%E4%BB%A5%E5%8F%8ALightGCL%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E8%B4%A8%E7%96%91/"> 【图协同过滤】对顶会论文HCCF以及LightGCL模型的一些质疑</a>
+			</div>
+			                  
+			<!-- 先找到与当前文字相同的目录 -->
+			   
+			<!-- 在找到当前文章所在的 index -->
+			          
+		</nav>
+	</div>
+	
+	<div class="kira-post-meta kira-rainbow">
+		
+			<a class="kirafont icon-appstore-fill -link" href="/categories/%E6%88%91%E7%9A%84%E9%A1%B9%E7%9B%AE/">我的项目</a><a class="kirafont icon-appstore-fill -link" href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a><a class="kirafont icon-appstore-fill -link" href="/categories/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/">经验分享</a>
+		
+		
+			<a class="kirafont icon-tag-fill -none-link" href="/tags/%E6%89%8B%E6%9C%BA%E6%B8%B8%E6%88%8F/" rel="tag">手机游戏</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/" rel="tag">推荐系统</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F/" rel="tag">明日方舟</a>
+		
+	</div>
+	
+		<script src="/js/kira-code-copy.js"></script>
+	
+	
+	<div class="kira-post-footer">
+		
+
+		
+	</div>
+	
+</div>
+
+				</div>
+			</div>
+			<div class="kira-right-column">
+	<a onclick="document.querySelector('#kira-top-header').scrollIntoView({behavior: 'smooth'});" class="kira-backtotop" aria-label="回到顶部" title="回到顶部">
+		<button class="mdui-fab mdui-ripple">
+			<i class="kirafont icon-caret-up"></i>
+		</button>
+	</a>
+</div>
+
+		</div>
+	</body>
+</html>
