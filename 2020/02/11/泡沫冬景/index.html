@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/css/layout.css">
 
 		
-		<title> 做一个人体动作识别的微信小程序 -  Blog</title>
+		<title> 在浮华中守护纯真——《泡沫冬景》点评 -  Blog</title>
 		<link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
 		<script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
 		<!-- lazyload -->
@@ -311,56 +311,55 @@
 		
 		<div class="kira-post-cover">
 			<img
-				data-src="https://cdn.jsdelivr.net/gh/Chocolate-Black/pictureCDN/img/00002.png"
+				data-src="https://img2.tapimg.com/bbcode/images/2b3a2506187a44de87a897f58362e2c2.jpg?imageView2/2/w/1080/h/9999/q/80/format/jpg/interlace/1/ignore-error/1"
 				data-sizes="auto"
-				alt="做一个人体动作识别的微信小程序"
+				alt="在浮华中守护纯真——《泡沫冬景》点评"
 				class="lazyload kira-post-cover-image disabled-kira-image"
 			/>
-			<h1>做一个人体动作识别的微信小程序</h1>
+			<h1>在浮华中守护纯真——《泡沫冬景》点评</h1>
 		</div>
 		
 		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
-			<a><i class="kirafont icon-calendar-fill"></i>2020年07月23日</a>
-			<a><i class="kirafont icon-areachart"></i>1.4k 字</a>
-			<a><i class="kirafont icon-time-circle-fill"></i>大概 6 分钟</a>
+			<a><i class="kirafont icon-calendar-fill"></i>2020年02月11日</a>
+			<a><i class="kirafont icon-areachart"></i>1.8k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 7 分钟</a>
 		</div>
-		<p>人体动作识别（Human Activity recognition）的应用领域有很多，比如健身、医疗等。最近学校期末作业要求做一个人体动作识别的小程序，正好把相关项目的经历与经验分享给大家~</p>
-<h3><span id="har小程序原理"><strong>HAR小程序原理</strong></span></h3><p>微信小程序识别人体动作，可以通过手机内置的六轴传感器采集加速度以及角速度，之后利用机器学习模型进行判别。为了实现这一功能，我们需要以下几步：</p>
-<ul>
-<li>确定要识别的动作；</li>
-<li>设计开发一个能够采集人体动作数据的微信小程序；</li>
-<li>数据处理；</li>
-<li>构建模型；</li>
-<li>把训练好的模型部署到微信小程序上。</li>
-</ul>
-<h3><span id="确定要识别的动作amp采集数据"><strong>确定要识别的动作&amp;采集数据</strong></span></h3><p>首先我们第一步要做的就是先确定要识别的动作——这个根据实际情况选择，一般来说动作差别越大越好区分识别。这里我选择的是站立、行走、仰卧起走、深蹲、扩胸这五个动作。</p>
-<p>那么如何利用微信小程序采集到人体动作的数据（即六轴的数据）呢？其实很简单，我们可以通过微信提供的加速度计和陀螺仪API实现。wx.startAccelerometer和wx.startGyroscope这两个函数可以开启对手机六轴数据的监听，wx.onAccelerometerChange和wx.onGyroscopeChange这两个函数可以记录下六轴的数据。具体用法可以参考微信文档：<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/api/device/gyroscope/wx.onGyroscopeChange.html">https://developers.weixin.qq.com/miniprogram/dev/api/device/gyroscope/wx.onGyroscopeChange.html</a></p>
-<p>需要强调的一点是，加速度计和陀螺仪的start函数都有一个interval的属性，代表着回调函数的执行频率。这里我们需要把interval设置为game，也就是20ms&#x2F;次，以保证后续识别的准确率。</p>
-<h3><span id="数据处理"><strong>数据处理</strong></span></h3><p>采集完人体动作数据后，我们首先需要对原始数据进行滤波处理。这里我用到的是中值滤波和巴特沃斯低通滤波，代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">from scipy.signal import butter, lfilter, medfilt<br><br>def butter_lowpass(cutoff, fs, order=5): #cutoff为截止频率，fs为采样频率，order为阶数<br>    nyq = 0.5 * fs<br>    normal_cutoff = cutoff / nyq<br>    b, a = butter(order, normal_cutoff, btype=&#x27;low&#x27;, analog=False)<br>    return b, a<br><br><br>def butter_lowpass_filter(data, cutoff, fs, order=5): #data为原始数据<br>    b, a = butter_lowpass(cutoff, fs, order=order)<br>    y = lfilter(b, a, data)<br>    return y  <br><br><br>def median_filter(data): <br>    output = np.copy(data)<br>    for i in range(6):<br>        output[i] = medfilt(data[i], 3)<br>    return output<br></code></pre></td></tr></table></figure>
-
-<p>这里我选用的截止频率为20Hz，阶数为5，可以根据实际情况进行调整。</p>
-<p>之后，我们还需要对滤波后的数据进行切片。切片长度为2.56s（128条记录），同时要有50%的overlap。什么意思呢？其实就是在以2.56s的长度切割完一个数据后，起点向后平移1.28s（一半长度），然后从起点开始切割2.56s的数据，而非整段整段的切。</p>
-<p>为什么要做overlap呢？这是因为人的动作往往是连续的，如果整段整段切，恐怕会丢失掉很多有用的信息，不利于后续模型的训练。overlap可以让我们充分利用我们采集到的数据，减少了我们采集数据的成本。至于overlap的比例，则可根据实际情况进行调整，以达到最好的效果。</p>
-<h3><span id="构建模型"><strong>构建模型</strong></span></h3><p>在对数据进行滤波和切片处理后，我们就可以构建模型进行训练了。通过六轴数据识别人体动作，其实本质上是一个时间序列多分类问题。因此，我们可以选用LSTM进行训练，代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">import tensorflow as tf<br>import tensorflow.keras as keras<br>import tensorflow.keras.layers as layers<br><br>model = keras.Sequential()<br>model.add(layers.LSTM(18,activation=&#x27;tanh&#x27;, recurrent_activation=&#x27;sigmoid&#x27;,dropout=0.2,return_sequences=True))<br>model.add(layers.LSTM(18,activation=&#x27;tanh&#x27;, recurrent_activation=&#x27;sigmoid&#x27;,dropout=0.2,return_sequences=True))<br>model.add(layers.LSTM(18,activation=&#x27;tanh&#x27;, recurrent_activation=&#x27;sigmoid&#x27;,dropout=0.2))<br>model.add(layers.Dense(5, activation=&#x27;softmax&#x27;)) #最后一层的节点数量取决于要训练的动作类别数量<br><br><br>model.compile(optimizer=keras.optimizers.RMSprop(lr=0.001),<br>             loss=keras.losses.CategoricalCrossentropy(),<br>              metrics=[&#x27;acc&#x27;])<br><br><br>history = model.fit(train_x, train_y, batch_size=32,epochs=100)<br>model.summary()<br><br>result = model.evaluate(test_x, test_y)<br>predict = model.predict(test_x)<br>print(model.metrics_names)<br>print(result)<br>print(&quot;saving the model...&quot;)<br>model.save(&#x27;HAR_model_LSTM.h5&#x27;)<br></code></pre></td></tr></table></figure>
-
-<h3><span id="把模型部署到微信小程序上"><strong>把模型部署到微信小程序上</strong></span></h3><p>微信支持并拥有tensorflow.js插件，然而个人并不是很推荐——因为微信小程序的大小是有限制的，把包安装完很容易超大小限制。因此最好的解决办法是把tensorflow.js安装在后端。这里我选择用云开发，并用npm在云函数所在的文件夹里把tensorflow.js安装好，之后上传到云端。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">npm install @tensorflow/tfjs@1.7.4<br></code></pre></td></tr></table></figure>
-
-<p>如果想要引用的这个包的话，需要在js文件夹里加一行：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">const tf = require(&#x27;@tensorflow/tfjs&#x27;)<br></code></pre></td></tr></table></figure>
-
-<p>然后就可以使用tf包里的函数了！具体如何使用还请查看官方文档：<a target="_blank" rel="noopener" href="https://tensorflow.google.cn/js/guide/nodejs?hl=zh-cn">https://tensorflow.google.cn/js/guide/nodejs?hl=zh-cn</a></p>
-<p>那么怎么去识别呢？首先，我们还是调用加速度计和角速度计的API，获取手机的六轴数据；然后，要把收集到的数据进行滤波处理（并且要和之前数据清洗时使用的滤波方法一样）——这会影响你识别的准确率；之后，调用你写好的云函数，把数据传到云函数上；最后，在云函数上输出预测值，返回到小程序上。</p>
-<p>以上就是我的HAR小程序的制作经验了。我把自己的代码放在了GitHub上，欢迎查看~<a target="_blank" rel="noopener" href="https://github.com/Chocolate-Black/HAR_tutor">https://github.com/Chocolate-Black/HAR_tutor</a></p>
+		<blockquote>
+<p>写于凌晨的评测</p>
+</blockquote>
+<h3><span id="前言">前言</span></h3><p>之前被宣传PV以及本作编剧吸引而关注此作。大概好几个月前玩了DEMO，当时觉得演出效果以及文笔相当不错，于是steam版出了后果断买了（可怜手机内存不够……）。结果到现在才通完，惭愧惭愧……</p>
+<p>先大概说下总体评价吧：本作的演出效果相当出彩，剧本完成度较高，具有一定深度；但前期缺乏冲突，吸引力不足，可能会劝退一部分人；与其说是galgame，到更不如说是一个中篇视觉小说。</p>
+<p>接下来，我将主要从剧情方面入手，边分析边指出本作的优缺点。</p>
+<h3><span id="详细点评">详细点评</span></h3><p>首先，《泡沫冬景》并不是一个传统意义上的galgame。</p>
+<p>一般来说，传统的galgame会包含以下元素：几个可攻略的性格各异的美少女，决定路线与结局的选项，以及必不可少的恋爱情节。</p>
+<p>但这些元素在《泡沫冬景》里都并不存在。本作只有一个女主角，并且选用了没有选项的直线结构，甚至其所讲的也并非一个爱情故事。</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://img2.tapimg.com/bbcode/images/53f06bcaf94a9dcc528aaebf634d0340.png?imageView2/2/w/1080/h/9999/q/80/format/jpg/interlace/1/ignore-error/1" alt="img" class="lazyload"></p>
+<p>这在gal界属实罕见。而且，作者并不打算用卖人设的方式来吸引玩家，而是决心把故事讲好。因此，在笔者看来，《泡沫冬景》更像是一篇反映现实的视觉小说。</p>
+<p>《泡沫冬景》的主题用一句话概括，便是“努力在物欲横流的社会中守护纯真”。</p>
+<p>然而，在现实的压力下，守护纯真，又何其困难？景萧然的父亲曾是一名有理想有目标的大学教授，可妻子之死以及文 革让他饱受折磨，最后沦为一个酒鬼，悲惨死去；江小墨抱着理想与目标来到日本，一开始像景萧然一样，从来不做见不得光的工作。可在组建家庭后，为了让家人过上好日子，他选择了妥协，却逐渐在追逐物质的路途中迷失了自我，最终妻子离他而去……而那些“卡巴莱”的陪酒女们，又何尝不是向现实妥协的可怜的人呢？</p>
+<p>女主樱井栞奈也差点因为屈从现实而迷失自我。她出身乡下，家有患有心脏疾病的妹妹。为了赚钱救治妹妹，栞奈决定辍学去东京打工。曾经的她，没有因为缺钱而选择出卖自我的灵魂，但在妹妹病情恶化的残酷现实面前，她不得不放弃自我，做一个陪酒女，学会假笑，学会奉承，博得客人的欢心，以此换取妹妹的救命钱。</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://img2.tapimg.com/bbcode/images/62d4666421bec591ff840d811da26ba1.png?imageView2/2/w/1080/h/9999/q/80/format/jpg/interlace/1/ignore-error/1" alt="img" class="lazyload"></p>
+<p>但他们并非真的完全失去了自我。景萧然的父亲把最后的希望寄托在儿子身上，送他到城里读书，希望他成为一个有理想有目标的人；江小墨尽管为了利益做了诸多恶事，但他打心底还是怀念三人与猫同居的时光，面对诗织的坚持，他最终还是软下心来。</p>
+<p>也许，现实已不再允许他们做一个纯真的人，但至少，他们可以挽救那些站在悬崖边上的孩子。受过教育的景萧然来到日本后，从未没有为了赚钱而选择同流合污，除了最后——为了守护栞奈，他决定放弃高考，和她共度难关。而“从来不干不来钱的活”的江小墨最后也因此感动，决定出钱帮助二人开店，不再让栞奈做陪酒女。</p>
+<p>明白了主题，黑猫的作用也自然不难理解——它象征着纯洁与美好。黑猫承载着江小墨一家美好幸福的回忆，当妻子带着黑猫离开时，诗织失去了圆满的家庭，江小墨迷失了纯真的自我。他们苦苦寻找黑猫，其实也就是在试图找回曾经的那份幸福；黑猫一开始只愿接近年幼的绘美，见到景萧然或是栞奈就跑，说明男女主都背负着沉重的过往，试图寻找幸福，却都未成功，只有还处在孩童阶段的绘美可以享受欢乐。最后男女主终于抓到黑猫，象征着收获幸福，也找回了迷失的自我。</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://img2.tapimg.com/bbcode/images/1ea32087fe5420b57f527b7a6b4fa18a.png?imageView2/2/w/1080/h/9999/q/80/format/jpg/interlace/1/ignore-error/1" alt="img" class="lazyload"></p>
+<p>整体来看，本作比较现实，具有一定深度，但在讲故事上，还是有或多或少的缺陷。</p>
+<p><strong>首先，玩家预期和作者意图出现了偏差。</strong>很明显，不少人把《泡沫冬景》当作爱情故事来看了。如果从爱情故事的角度来看本作，那么结尾确实如很多人所说，草草收场——男女主这正要好上了，突然就结束了？？？显然会觉得欠缺。但从主旨来看，男主明白了生活的意义，女主不再迫于现实而出卖自我，江小墨也得到了内心的宽慰，这算是比较圆满的结局。这种偏差不能全怪作者，也不能全怪读者，但这种预期偏差确实是本作的一个缺陷。</p>
+<p><strong>其次，景萧然对于表现主题的作用不够。</strong>私以为表现主题的任务主要还是落在了女主和江小墨身上，男主更像是一个为了拯救女主存在的工具人（可能程度有些过了，但大概是这么个意思）——这是由于景萧然的人物内心矛盾不足所致。从开始到结束，男主的内心并没有泛起多大的波澜。如果作者能够深入景萧然的内心，着手加剧其与外界社会的矛盾，表现他迷茫挣扎的过程，最后男主恍然大悟，明白了他的人生目标，会让剧本更上一层楼。</p>
+<p><strong>最后，也是慢热作品都有的一个硬伤——前期缺乏冲突，吸引力不足。</strong>《泡沫冬景》的剧情前期主要还是集中在景萧然与栞奈的相识到逐渐熟悉彼此的过程，偶尔穿插江小墨与景萧然的故事，展现当时物欲横流的日本社会。然而景萧然与栞奈不够亮眼的人设以及作者偏写实严肃的风格，导致景萧然与栞奈即使存在隔阂，也很难爆发精彩的冲突。不过多亏了本作极其优秀的演出效果以及作者优秀的文笔，即便剧情慢热也依旧能吸引玩家继续游玩。</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://img2.tapimg.com/bbcode/images/a7351c60c00889831e47e14c0d3feaa5.png?imageView2/2/w/1080/h/9999/q/80/format/jpg/interlace/1/ignore-error/1" alt="img" class="lazyload"></p>
+<p>总的来说，该作还是值得一玩的。特别我要吹爆《泡沫冬景》的静态动画，真的是非常非常用心！可以说大大提升了玩家的沉浸感。时间有些晚了，就不多写了，下面是我个人的评分：</p>
+<p><strong>剧情：8.3</strong></p>
+<p><strong>画面：9.5</strong></p>
+<p><strong>音乐：8.5</strong></p>
+<p><strong>综合评分：8.5</strong></p>
 
 	</article>
 
 	 
     <div class="kira-post-copyright">
         <strong>本文作者：</strong>ChocolateBlack<br>
-        <strong>本文链接：</strong><a href="http://chocolateblack.club/2020/07/23/%E5%81%9A%E4%B8%80%E4%B8%AA%E4%BA%BA%E4%BD%93%E5%8A%A8%E4%BD%9C%E8%AF%86%E5%88%AB%E7%9A%84%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" title="http:&#x2F;&#x2F;chocolateblack.club&#x2F;2020&#x2F;07&#x2F;23&#x2F;做一个人体动作识别的微信小程序&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;chocolateblack.club&#x2F;2020&#x2F;07&#x2F;23&#x2F;做一个人体动作识别的微信小程序&#x2F;</a><br>
+        <strong>本文链接：</strong><a href="http://chocolateblack.club/2020/02/11/%E6%B3%A1%E6%B2%AB%E5%86%AC%E6%99%AF/" title="http:&#x2F;&#x2F;chocolateblack.club&#x2F;2020&#x2F;02&#x2F;11&#x2F;泡沫冬景&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;chocolateblack.club&#x2F;2020&#x2F;02&#x2F;11&#x2F;泡沫冬景&#x2F;</a><br>
         
             <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
         
@@ -369,26 +368,32 @@
   
 	<div class="kira-post-nav">
 		<nav class="post-nav">
-			      
+			  
 			<!-- 先找到与当前文字相同的目录 -->
-			   
+			         
 			<!-- 在找到当前文章所在的 index -->
+			        
+			<!-- 上一篇文章 -->
+			<div class="old">
+				<span>上一章</span>
+				<a href="/2019/10/09/fengyuzhijiao/"> 【安利向】taptap满分神作——《丰裕之角 -不可思议之物居住的小镇-》麟篇 全面测评</a>
+			</div>
 			       
 			<!-- 下一篇文章 -->
 			<div class="new">
 				<span>下一章</span>
-				<a href="/2020/10/06/C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0LSTM%E7%AE%97%E6%B3%95/"> C语言实现LSTM算法</a>
+				<a href="/2023/03/25/%E7%AE%80%E8%AF%84%E9%93%83%E8%8A%BD%E4%B9%8B%E6%97%85/"> 简评《铃芽之旅》</a>
 			</div>
-			                                    
+			                          
 		</nav>
 	</div>
 	
 	<div class="kira-post-meta kira-rainbow">
 		
-			<a class="kirafont icon-appstore-fill -link" href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a>
+			<a class="kirafont icon-appstore-fill -link" href="/categories/%E8%AF%84%E6%B5%8B/">评测</a>
 		
 		
-			<a class="kirafont icon-tag-fill -none-link" href="/tags/LSTM/" rel="tag">LSTM</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/%E4%BA%BA%E4%BD%93%E5%8A%A8%E4%BD%9C%E8%AF%86%E5%88%AB/" rel="tag">人体动作识别</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">微信小程序</a>
+			<a class="kirafont icon-tag-fill -none-link" href="/tags/AVG/" rel="tag">AVG</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/%E6%B3%A1%E6%B2%AB%E5%86%AC%E6%99%AF/" rel="tag">泡沫冬景</a>
 		
 	</div>
 	
