@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html 
+	lang="zh">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+<link rel="stylesheet" href="/css/layout.css">
+
+		
+		<title> 基于Langchain-Chatchat和BERT-VITS2实现RAG多路召回+AI语音播报 -  Blog</title>
+		<link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+		<script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+		<!-- lazyload -->
+		<script src="https://unpkg.com/lazysizes@5.1.0/lazysizes.min.js"></script>
+		<!-- smooth-scrolling -->
+		<script src="https://unpkg.com/smooth-scrolling.js@1.0.0"></script>
+		<!-- highlight -->
+		<link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.6.0/styles/atom-one-dark.min.css" />
+		<script src="//unpkg.com/@highlightjs/cdn-assets@11.6.0/highlight.min.js"></script>
+		<!-- 预置 kiraicon -->
+		<link rel="stylesheet" href="/lib/iconfont/iconfont.css" crossorigin />
+		
+			<link rel="stylesheet" href="//at.alicdn.com/t/c/font_3299330_2a7ov96q7e3.css" crossorigin />
+		
+		<link rel="stylesheet" href="/lib/iconfont/iconfont.css" crossorigin />
+		<link
+			rel="shortcut icon"
+			href="https://z4a.net/images/2023/03/26/new_ava.png"
+			type="image/png"
+		/>
+		<link rel="stylesheet" href="/deps/css/APlayer.min.css">
+		
+			
+		<link rel="stylesheet" href="/style.css" />
+			
+		<link rel="stylesheet" href="/custom.css" />
+			
+		
+		<script src="/deps/js/APlayer.min.js"></script>
+		<script src="/deps/js/Meting.min.js"></script>
+	<meta name="generator" content="Hexo 6.3.0"></head>
+
+	<body>
+		<div
+			class="kira-background"
+			style="background-image: url('https://z4a.net/images/2023/03/26/linxing.png')"
+		></div>
+		<div class="kira-header">
+    <a
+        class="kira-drawer-button mdui-ripple"
+        title="导航栏"
+        onclick="document.querySelector('.kira-sidebar-modal').classList.add('show');document.querySelector('.kira-sidebar#sidebar').classList.add('show');"
+    >
+        <i class="kirafont icon-menu"></i>
+    </a>
+    <a href="/" title="Blog">
+        <img
+			src="https://z4a.net/images/2023/03/26/1.jpg"
+			alt="ChocolateBlack"
+		/>
+    </a>
+</div>
+		<div class="kira-body">
+			<div class="kira-sidebar" id="sidebar">
+	<div class="kira-avatar mdui-ripple">
+		<a target="_blank" rel="noopener" href="https://z4a.net/images/2023/03/26/1.jpg" title="ChocolateBlack">
+			<img
+				src="https://z4a.net/images/2023/03/26/1.jpg"
+				alt="ChocolateBlack"
+			/>
+		</a>
+	</div>
+	<div class="kira-count">
+		<div><span>文章</span>16</div>
+		<div><span>标签</span>20</div>
+		<div><span>分类</span>5</div>
+	</div>
+	<div class="kira-list">
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/"
+			title="回到首页"
+		>
+			<i
+				class="kirafont icon-home"
+			></i>
+			<div class="kira-list-item-content">回到首页</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/archive.html"
+			title="文章归档"
+		>
+			<i
+				class="kirafont icon-container"
+			></i>
+			<div class="kira-list-item-content">文章归档</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/about.html"
+			title="关于本人"
+		>
+			<i
+				class="kirafont icon-user"
+			></i>
+			<div class="kira-list-item-content">关于本人</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/friends.html"
+			title="我的朋友"
+		>
+			<i
+				class="kirafont icon-team"
+			></i>
+			<div class="kira-list-item-content">我的朋友</div>
+		</a>
+		
+	</div>
+	<aside id="kira-sidebar">
+		 <div class="kira-widget-wrap">
+	<div class="kira-widget kira-social">
+		<a
+			class="mdui-ripple"
+			href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=1106187173&website=www.oicqzone.com"
+			target="_blank"
+			mdui-tooltip="{content: 'QQ'}"
+			style="
+				color: rgb(49, 174, 255);
+				background-color: rgba(49, 174, 255, .1);
+			"
+		>
+			<i
+				class="kirafont icon-QQ"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://space.bilibili.com/2106744"
+			target="_blank"
+			mdui-tooltip="{content: '哔哩哔哩'}"
+			style="
+				color: rgb(231, 106, 141);
+				background-color: rgba(231, 106, 141, .15);
+			"
+		>
+			<i
+				class="kirafont icon-bilibili"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://github.com/Chocolate-Black"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(25, 23, 23);
+				background-color: rgba(25, 23, 23, .15);
+			"
+		>
+			<i
+				class="kirafont icon-github"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://gitee.com/xu_jing_yu/"
+			target="_blank"
+			mdui-tooltip="{content: 'Gitee'}"
+			style="
+				color: rgb(165, 15, 15);
+				background-color: rgba(165, 15, 15, .15);
+			"
+		>
+			<i
+				class="kirafont icon-gitee"
+			></i> </a
+		>
+	</div>
+</div>
+  
+<div class="kira-widget-wrap">
+  <h3 class="kira-widget-title">分类</h3>
+  <div class="kira-widget">
+
+    <ul class="category-list">
+
+      
+
+
+      
+
+      
+
+      <li class="category-list-item">
+        <a class="category-list-link" href="/categories/同人/">同人</a>
+        <span class="category-list-count">1</span>
+      </li>
+
+      
+
+      <li class="category-list-item">
+        <a class="category-list-link" href="/categories/我的项目/">我的项目</a>
+        <span class="category-list-count">2</span>
+      </li>
+
+      
+
+      <li class="category-list-item">
+        <a class="category-list-link" href="/categories/技术教程/">技术教程</a>
+        <span class="category-list-count">5</span>
+      </li>
+
+      
+
+      <li class="category-list-item">
+        <a class="category-list-link" href="/categories/经验分享/">经验分享</a>
+        <span class="category-list-count">2</span>
+      </li>
+
+      
+
+      <li class="category-list-item">
+        <a class="category-list-link" href="/categories/评测/">评测</a>
+        <span class="category-list-count">9</span>
+      </li>
+
+      
+    </ul>
+
+  </div>
+</div>
+  
+<div class="kira-widget-wrap">
+	<div id="randomtagcloud" class="kira-widget tagcloud kira-rainbow"><a href="/tags/AVG/" style="font-size: 20px;">AVG</a> <a href="/tags/C%E8%AF%AD%E8%A8%80/" style="font-size: 10px;">C语言</a> <a href="/tags/PC%E6%B8%B8%E6%88%8F/" style="font-size: 15px;">PC游戏</a> <a href="/tags/RAG/" style="font-size: 10px;">RAG</a> <a href="/tags/%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA/" style="font-size: 10px;">三维重建</a> <a href="/tags/%E4%BA%BA%E4%BD%93%E5%8A%A8%E4%BD%9C%E8%AF%86%E5%88%AB/" style="font-size: 10px;">人体动作识别</a> <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" style="font-size: 17.5px;">人工智能</a> <a href="/tags/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">图神经网络</a> <a href="/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/" style="font-size: 10px;">大语言模型</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 10px;">微信小程序</a> <a href="/tags/%E6%81%90%E6%80%96/" style="font-size: 10px;">恐怖</a> <a href="/tags/%E6%82%AC%E7%96%91/" style="font-size: 15px;">悬疑</a> <a href="/tags/%E6%89%8B%E6%9C%BA%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">手机游戏</a> <a href="/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/" style="font-size: 12.5px;">推荐系统</a> <a href="/tags/%E6%96%B0%E6%B5%B7%E8%AF%9A/" style="font-size: 10px;">新海诚</a> <a href="/tags/%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F/" style="font-size: 10px;">明日方舟</a> <a href="/tags/%E7%94%B5%E5%BD%B1/" style="font-size: 10px;">电影</a> <a href="/tags/%E7%A7%8B%E4%B9%8B%E5%9B%9E%E5%BF%86/" style="font-size: 10px;">秋之回忆</a> <a href="/tags/%E8%AF%AD%E9%9F%B3%E7%94%9F%E6%88%90/" style="font-size: 10px;">语音生成</a> <a href="/tags/%E9%9F%B3%E4%B9%90/" style="font-size: 10px;">音乐</a></div>
+	
+</div>
+
+ 
+	</aside>
+	<div class="kira-copyright">
+		&copy; 2024
+		<a href="/">ChocolateBlack</a
+		>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> &
+		<!-- TODO: github 链接 -->
+		<a href="https://github.com/ch1ny/kira-hexo/" target="_blank">Kira-Hexo</a>
+		<br />
+		
+			<a href="https://beian.miit.gov.cn/" target="_blank">赣ICP备******号</a>
+		
+		
+	</div>
+</div>
+<div class="kira-sidebar-modal" id="sidebar-modal" onclick="(function(self) {
+	self.classList.remove('show');
+	document.querySelector('.kira-sidebar.show#sidebar').classList.remove('show');
+})(this)"></div>
+			<div class="kira-content">
+				<div id="kira-top-header"></div>
+				<div class="kira-main-content">
+					
+<link rel="stylesheet" href="/css/kira-image.css">
+
+<script src="/js/kira-image.js"></script>
+<div class="kira-image">
+    <div class="kira-image-modal">
+        <div class="kira-image-header">
+            <div class="kira-image-counter"></div>
+            <div class="kira-image-title"></div>
+            <div class="kira-image-operation">
+                <div class="kira-image-operation-button" id="kira-image-operation-button-zoom">
+                    <i class="kirafont icon-zoom-in"></i>
+                </div>
+                <div class="kira-image-operation-button" id="kira-image-operation-button-close">
+                    <i class="kirafont icon-close"></i>
+                </div>
+            </div>
+        </div>
+        <div class="kira-image-container">
+            <div class="kira-image-prev-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-left"></i>
+                </div>
+            </div>
+            <div class="kira-image-list">
+                <div class="kira-image-prev">
+                    <img />
+                </div>
+                <div class="kira-image-now">
+                    <img />
+                </div>
+                <div class="kira-image-next">
+                    <img />
+                </div>
+            </div>
+            <div class="kira-image-next-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="kira-post">
+	<article>
+		
+		<div class="kira-post-cover">
+			<img
+				data-src="https://z4a.net/images/2024/03/16/2024030823083900-EC34122370F7D7C3E01E28A115989EB3.jpg"
+				data-sizes="auto"
+				alt="基于Langchain-Chatchat和BERT-VITS2实现RAG多路召回+AI语音播报"
+				class="lazyload kira-post-cover-image disabled-kira-image"
+			/>
+			<h1>基于Langchain-Chatchat和BERT-VITS2实现RAG多路召回+AI语音播报</h1>
+		</div>
+		
+		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
+			<a><i class="kirafont icon-calendar-fill"></i>2024年03月20日</a>
+			<a><i class="kirafont icon-areachart"></i>2.7k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 13 分钟</a>
+		</div>
+		<h2><span id="前言">前言</span></h2><p>目前Langchain-Chatchat的0.2.x版本并不支持多路召回，着实有点遗憾，于是我个人在Langchain-Chatchat的基础上增加了可以融合多个召回算法的多路召回demo以及BM25检索算法，并且结合了BERT-VITS2，实现大模型回答的AI语音播报。</p>
+<p>项目的简单演示视频：</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV11w4m1R7H8">https://www.bilibili.com/video/BV11w4m1R7H8</a></p>
+<p>完整代码可以看我的Github项目：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Chocolate-Black/Langchain-MO-AI-Chat">https://github.com/Chocolate-Black/Langchain-MO-AI-Chat</a></p>
+<p>下面简单介绍下我是怎么在Langchain-Chatchat上进行修改的。</p>
+<h2><span id="多路召回部分">多路召回部分</span></h2><p>Langchain-Chatchat的知识库功能，主要通过KBService基类进行实现，子类负责实现具体方法。文件存放在server&#x2F;knowledge_base&#x2F;kb_service下。</p>
+<p>这里以Langchain-Chatchat自带的DefaultKBService为例，对核心函数进行讲解：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">DefaultKBService</span>(<span class="hljs-title class_ inherited__">KBService</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">do_create_kb</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">pass</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">do_drop_kb</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">pass</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">do_add_doc</span>(<span class="hljs-params">self, docs: <span class="hljs-type">List</span>[Document]</span>):<br>        <span class="hljs-keyword">pass</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">do_clear_vs</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">pass</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">vs_type</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-built_in">str</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;default&quot;</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">do_init</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">pass</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">do_search</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">pass</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">do_insert_multi_knowledge</span>(<span class="hljs-params">self</span>): <span class="hljs-comment"># 暂不清楚功能，非必需</span><br>        <span class="hljs-keyword">pass</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">do_insert_one_knowledge</span>(<span class="hljs-params">self</span>):<span class="hljs-comment"># 暂不清楚功能，非必需</span><br>        <span class="hljs-keyword">pass</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">do_delete_doc</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">pass</span><br></code></pre></td></tr></table></figure>
+
+<h3><span id="do_init">do_init</span></h3><p>知识库的初始化操作，创建知识库后会执行。这里一般用来初始化文件路径等等。</p>
+<p>在我实现的用于多路召回的MixKBService中，do_init会根据选择的KBService，依次进行初始化，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_vs_path</span>(<span class="hljs-params">self</span>):<br>    <span class="hljs-keyword">return</span> os.path.join(get_kb_path(self.kb_name), <span class="hljs-string">&quot;vector_store&quot;</span>)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_kb_path</span>(<span class="hljs-params">self</span>):<br>    <span class="hljs-keyword">return</span> get_kb_path(self.kb_name)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">init_mix_vs_types</span>(<span class="hljs-params">self,vs_types: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>] = MIX_VS_TYPES</span>):<br>    self.mix_vs_types = vs_types<br>    <br><span class="hljs-keyword">def</span> <span class="hljs-title function_">do_init</span>(<span class="hljs-params">self</span>):<br>    self.kb_path = self.get_kb_path()<br>    self.vs_path = self.get_vs_path()<br>    self.init_mix_vs_types()<br>    services = []<br>    <span class="hljs-keyword">for</span> vs_type <span class="hljs-keyword">in</span> self.mix_vs_types:<br>        kb = KBServiceFactory.get_service(self.kb_name,vector_store_type=vs_type,embed_model=self.embed_model)<br>        services.append(kb)<br></code></pre></td></tr></table></figure>
+
+<p>MIX_VS_TYPES定义于configs&#x2F;kb_config.py，是存放vs_types的列表。</p>
+<p>KBServiceFactory.get_service用于获取对应vs_type的KBService。</p>
+<h3><span id="vs_type">vs_type</span></h3><p>知识库的类别，用于区分不同的知识库类别。KBServiceFactory类会根据输入的类别（SupportedVSType）返回相应的知识库service。</p>
+<p>因此，如果我们想要创建自己的知识库Service类，就需要在server&#x2F;knowledge_base&#x2F;kb_service&#x2F;base.py里增加SupportedVSType：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SupportedVSType</span>:<br>    FAISS = <span class="hljs-string">&#x27;faiss&#x27;</span><br>    MILVUS = <span class="hljs-string">&#x27;milvus&#x27;</span><br>    DEFAULT = <span class="hljs-string">&#x27;default&#x27;</span><br>    ZILLIZ = <span class="hljs-string">&#x27;zilliz&#x27;</span><br>    PG = <span class="hljs-string">&#x27;pg&#x27;</span><br>    ES = <span class="hljs-string">&#x27;es&#x27;</span><br>    CHROMADB = <span class="hljs-string">&#x27;chromadb&#x27;</span><br>    BM25 = <span class="hljs-string">&#x27;bm25&#x27;</span><br>    MIX = <span class="hljs-string">&#x27;mix&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>这里我增加了BM25和MIX两个类别，其中MIX为我实现多路召回的Service的vs_type。</p>
+<p>然后，对该文件下的KBServiceFactory类的get_service增加elif选项：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">KBServiceFactory</span>:<br><br><span class="hljs-meta">    @staticmethod</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_service</span>(<span class="hljs-params">kb_name: <span class="hljs-built_in">str</span>,</span><br><span class="hljs-params">                    vector_store_type: <span class="hljs-type">Union</span>[<span class="hljs-built_in">str</span>, SupportedVSType],</span><br><span class="hljs-params">                    embed_model: <span class="hljs-built_in">str</span> = EMBEDDING_MODEL,</span><br><span class="hljs-params">                    </span>) -&gt; KBService:<br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(vector_store_type, <span class="hljs-built_in">str</span>):<br>            vector_store_type = <span class="hljs-built_in">getattr</span>(SupportedVSType, vector_store_type.upper())<br>        <span class="hljs-keyword">if</span> SupportedVSType.FAISS == vector_store_type:<br>            <span class="hljs-keyword">from</span> server.knowledge_base.kb_service.faiss_kb_service <span class="hljs-keyword">import</span> FaissKBService<br>            <span class="hljs-keyword">return</span> FaissKBService(kb_name, embed_model=embed_model)<br>        <span class="hljs-keyword">elif</span> SupportedVSType.PG == vector_store_type:<br>            <span class="hljs-keyword">from</span> server.knowledge_base.kb_service.pg_kb_service <span class="hljs-keyword">import</span> PGKBService<br>            <span class="hljs-keyword">return</span> PGKBService(kb_name, embed_model=embed_model)<br>        <span class="hljs-keyword">elif</span> SupportedVSType.MILVUS == vector_store_type:<br>            <span class="hljs-keyword">from</span> server.knowledge_base.kb_service.milvus_kb_service <span class="hljs-keyword">import</span> MilvusKBService<br>            <span class="hljs-keyword">return</span> MilvusKBService(kb_name,embed_model=embed_model)<br>        <span class="hljs-keyword">elif</span> SupportedVSType.ZILLIZ == vector_store_type:<br>            <span class="hljs-keyword">from</span> server.knowledge_base.kb_service.zilliz_kb_service <span class="hljs-keyword">import</span> ZillizKBService<br>            <span class="hljs-keyword">return</span> ZillizKBService(kb_name, embed_model=embed_model)<br>        <span class="hljs-keyword">elif</span> SupportedVSType.DEFAULT == vector_store_type:<br>            <span class="hljs-keyword">from</span> server.knowledge_base.kb_service.milvus_kb_service <span class="hljs-keyword">import</span> MilvusKBService<br>            <span class="hljs-keyword">return</span> MilvusKBService(kb_name,<br>                                   embed_model=embed_model)  <span class="hljs-comment"># other milvus parameters are set in model_config.kbs_config</span><br>        <span class="hljs-keyword">elif</span> SupportedVSType.ES == vector_store_type:<br>            <span class="hljs-keyword">from</span> server.knowledge_base.kb_service.es_kb_service <span class="hljs-keyword">import</span> ESKBService<br>            <span class="hljs-keyword">return</span> ESKBService(kb_name, embed_model=embed_model)<br>        <span class="hljs-keyword">elif</span> SupportedVSType.CHROMADB == vector_store_type:<br>            <span class="hljs-keyword">from</span> server.knowledge_base.kb_service.chromadb_kb_service <span class="hljs-keyword">import</span> ChromaKBService<br>            <span class="hljs-keyword">return</span> ChromaKBService(kb_name, embed_model=embed_model)<br>        <span class="hljs-comment"># BM25</span><br>        <span class="hljs-keyword">elif</span> SupportedVSType.BM25 == vector_store_type:<br>            <span class="hljs-keyword">from</span> server.knowledge_base.kb_service.bm25_kb_service <span class="hljs-keyword">import</span> BM25KBService<br>            <span class="hljs-keyword">return</span> BM25KBService(kb_name)<br>        <span class="hljs-comment"># 多路召回</span><br>        <span class="hljs-keyword">elif</span> SupportedVSType.MIX == vector_store_type:<br>            <span class="hljs-keyword">from</span> server.knowledge_base.kb_service.mix_kb_service <span class="hljs-keyword">import</span> MixKBService<br>            <span class="hljs-keyword">return</span> MixKBService(kb_name)<br>        <span class="hljs-keyword">elif</span> SupportedVSType.DEFAULT == vector_store_type:  <span class="hljs-comment"># kb_exists of default kbservice is False, to make validation easier.</span><br>            <span class="hljs-keyword">from</span> server.knowledge_base.kb_service.default_kb_service <span class="hljs-keyword">import</span> DefaultKBService<br>            <span class="hljs-keyword">return</span> DefaultKBService(kb_name)<br></code></pre></td></tr></table></figure>
+
+<h3><span id="do_create_kb">do_create_kb</span></h3><p>创建知识库。该函数主要是用来创建vector_store文件夹，创建并存放索引文件。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">do_create_kb</span>(<span class="hljs-params">self</span>):<br>    <span class="hljs-keyword">for</span> service <span class="hljs-keyword">in</span> self.kb_services:<br>        service.do_create_kb() <span class="hljs-comment"># 挨个创建</span><br></code></pre></td></tr></table></figure>
+
+<h3><span id="do_clear_vs">do_clear_vs</span></h3><p>删除向量文件夹（一般都是vectore_store）内的索引文件。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">do_clear_vs</span>(<span class="hljs-params">self</span>):<br>    <span class="hljs-keyword">for</span> service <span class="hljs-keyword">in</span> self.kb_services:<br>        service.do_clear_vs() <span class="hljs-comment"># 挨个清空</span><br></code></pre></td></tr></table></figure>
+
+<h3><span id="do_drop_kb">do_drop_kb</span></h3><p>彻底删除知识库，包括<strong>存放知识库文件的文件夹（content）</strong>以及<strong>向量文件夹（vector_store）</strong>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">do_drop_kb</span>(<span class="hljs-params">self</span>):<br>    self.do_clear_vs()<br>    <span class="hljs-keyword">try</span>:<br>        shutil.rmtree(self.kb_path)<br>    <span class="hljs-keyword">except</span> Exception:<br>        ...<br></code></pre></td></tr></table></figure>
+
+<h3><span id="do_add_doc">do_add_doc</span></h3><p>该函数用于向知识库添加文档。对于向量数据库来说（faiss），还需要将文档先转变为embedding。</p>
+<p>添加完成之后需要返回文档的信息，用于存储到info.db中，这里以FaissKBService的do_add_doc函数为例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">do_add_doc</span>(<span class="hljs-params">self,</span><br><span class="hljs-params">               docs: <span class="hljs-type">List</span>[Document],</span><br><span class="hljs-params">               **kwargs,</span><br><span class="hljs-params">               </span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-type">Dict</span>]:<br>    data = self._docs_to_embeddings(docs) <span class="hljs-comment"># 将向量化单独出来可以减少向量库的锁定时间</span><br><br>    <span class="hljs-keyword">with</span> self.load_vector_store().acquire() <span class="hljs-keyword">as</span> vs:<br>        ids = vs.add_embeddings(text_embeddings=<span class="hljs-built_in">zip</span>(data[<span class="hljs-string">&quot;texts&quot;</span>], data[<span class="hljs-string">&quot;embeddings&quot;</span>]),<br>                                metadatas=data[<span class="hljs-string">&quot;metadatas&quot;</span>],<br>                                ids=kwargs.get(<span class="hljs-string">&quot;ids&quot;</span>))<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> kwargs.get(<span class="hljs-string">&quot;not_refresh_vs_cache&quot;</span>):<br>            vs.save_local(self.vs_path)<br>    doc_infos = [&#123;<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-built_in">id</span>, <span class="hljs-string">&quot;metadata&quot;</span>: doc.metadata&#125; <span class="hljs-keyword">for</span> <span class="hljs-built_in">id</span>, doc <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(ids, docs)]<br>    torch_gc()<br>    <span class="hljs-keyword">return</span> doc_infos<br></code></pre></td></tr></table></figure>
+
+<p>在我实现的MixKBService类中，只需要挨个添加即可，然后返回其中一个doc_infos：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">do_add_doc</span>(<span class="hljs-params">self, docs: <span class="hljs-type">List</span>[Document],**kwargs</span>)-&gt; <span class="hljs-type">List</span>[<span class="hljs-type">Dict</span>]:<br>    doc_infos = []<br>    <span class="hljs-keyword">for</span> service <span class="hljs-keyword">in</span> self.kb_services:<br>        doc_infos = service.do_add_doc(docs,**kwargs)<br>        <br>    <span class="hljs-keyword">return</span> doc_infos<br></code></pre></td></tr></table></figure>
+
+<h3><span id="do_delete_doc">do_delete_doc</span></h3><p>删除知识库内某个文件下的所有文档。也是一样的，挨个删除。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">do_delete_doc</span>(<span class="hljs-params">self,kb_file: KnowledgeFile,**kwargs</span>):<br>    ids = []<br>    <span class="hljs-keyword">for</span> service <span class="hljs-keyword">in</span> self.kb_services:<br>        ids = service.do_delete_doc(kb_file,**kwargs)<br>    <span class="hljs-keyword">return</span> ids<br></code></pre></td></tr></table></figure>
+
+<h3><span id="save_vector_storex2fload_vector_store">save_vector_store&#x2F;load_vector_store</span></h3><p>虽然DefaultKBService没有这俩函数，但一般还是需要实现。</p>
+<p>save&#x2F;load主要用于保存&#x2F;加载索引文件，根据算法&#x2F;向量库的不同，这里的写法也会不同。这里不再细说，具体可参考我github上的代码。</p>
+<h3><span id="do_search">do_search</span></h3><p>重点来了。这一函数用于搜索与query最相关的top_k个文档，也是多路召回算法的关键处。</p>
+<p>这里我采用的是比较简单的多路召回策略：每个service搜索top_k个文档，然后取并集，再根据score进行排序，选取前top_k个。其中召回用到的算法有：向量最大相似度、BM25。</p>
+<p>另外最大相似度的得分标准（越小越相似）和BM25的得分标准（越大越相似）相反，因此我对BM25的得分进行倒数处理并做了简单的权重平衡操作。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">do_search</span>(<span class="hljs-params">self,</span><br><span class="hljs-params">              query: <span class="hljs-built_in">str</span>,</span><br><span class="hljs-params">              top_k: <span class="hljs-built_in">int</span>,</span><br><span class="hljs-params">              score_threshold: <span class="hljs-built_in">float</span> = SCORE_THRESHOLD</span>)-&gt; <span class="hljs-type">List</span>[<span class="hljs-type">Tuple</span>[Document, <span class="hljs-built_in">float</span>]]:<br>    docs_info = <span class="hljs-built_in">dict</span>()<br>    results = []<br>    <span class="hljs-keyword">for</span> service <span class="hljs-keyword">in</span> self.kb_services:<br>        docs = service.do_search(query,top_k,score_threshold)<br>        <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> docs:<br>            md5 = hashlib.md5()<br>            md5.update(doc[<span class="hljs-number">0</span>].page_content.encode(<span class="hljs-string">&#x27;utf-8&#x27;</span>))<br>            key = md5.hexdigest()<br>            <span class="hljs-keyword">if</span> service.vs_type() == <span class="hljs-string">&#x27;bm25&#x27;</span>:<br>                score = <span class="hljs-number">4</span>/doc[<span class="hljs-number">1</span>] - <span class="hljs-number">0.01</span><br>            <span class="hljs-keyword">else</span>:<br>                score = doc[<span class="hljs-number">1</span>]<br>            <span class="hljs-keyword">if</span> key <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> docs_info:<br>                docs_info[key] = &#123;<span class="hljs-string">&#x27;doc&#x27;</span>:doc[<span class="hljs-number">0</span>],<span class="hljs-string">&#x27;score&#x27;</span>:score,<span class="hljs-string">&#x27;cnt&#x27;</span>:<span class="hljs-number">1</span>&#125;<br>            <span class="hljs-keyword">else</span>:<br>                docs_info[key][<span class="hljs-string">&#x27;cnt&#x27;</span>] += <span class="hljs-number">1</span><br>                docs_info[key][<span class="hljs-string">&#x27;score&#x27;</span>] += score<br>        <br>    <span class="hljs-keyword">for</span> key <span class="hljs-keyword">in</span> docs_info.keys():<br>        score = docs_info[key][<span class="hljs-string">&#x27;score&#x27;</span>]/docs_info[key][<span class="hljs-string">&#x27;cnt&#x27;</span>]<br>        pair = (docs_info[key][<span class="hljs-string">&#x27;doc&#x27;</span>],score)<br>        results.append(pair)<br>        <br>    results = <span class="hljs-built_in">sorted</span>(results,key=<span class="hljs-keyword">lambda</span> t: t[<span class="hljs-number">1</span>])<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(results) &gt; top_k:<br>        <span class="hljs-keyword">return</span> results[:top_k]<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> results<br></code></pre></td></tr></table></figure>
+
+<p>关于BM25Service的实现方法，这里不再讲解，具体可以参考我github上的代码。</p>
+<h2><span id="ai语音部分">AI语音部分</span></h2><p>关于BERT-VITS2怎么训练自己的语音模型，限于篇幅不进行讲解。有兴趣可以去看下BERT-VITS2的教程，一抓一大把。</p>
+<p>这里主要讲解如何将AI语音模型结合到Langchain-Chatchat的WebUI中，实现大模型回答的语音播报。</p>
+<p>WebUI对话功能与界面，主要通过webui_pages&#x2F;dialogue&#x2F;dialogue.py实现。</p>
+<p>首先，BERT-VITS2需要确定模型文件路径、说话人、以及sdp_ratio&#x2F;noise_scale&#x2F;noise_scale_w&#x2F;length_scale四项参数。所以我们需要在WebUI中让用户进行选择：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">on_project_change</span>():<br>           project = st.session_state.dialogue_project<br>           config_path = PROJECTS[project][<span class="hljs-string">&#x27;config_path&#x27;</span>]<br>           st.session_state[<span class="hljs-string">&quot;audio_generator&quot;</span>] = AudioGenerator(project,config_path)<br>           st.toast(<span class="hljs-string">f&quot;切换Project为:<span class="hljs-subst">&#123;project&#125;</span>&quot;</span>)<br>   <br>       dialogue_projects = <span class="hljs-built_in">list</span>(PROJECTS.keys())<br>       default_index = dialogue_projects.index(DEFAULT_PROJECT)<br>       <br>       dialogue_project = st.selectbox(<span class="hljs-string">&quot;请选择Project：&quot;</span>,<br>                                    dialogue_projects,<br>                                    index=default_index,<br>                                    on_change=on_project_change,<br>                                    key=<span class="hljs-string">&quot;dialogue_project&quot;</span>,<br>                                    )<br>       <br>       <span class="hljs-keyword">def</span> <span class="hljs-title function_">on_speaker_change</span>():<br>           speaker = st.session_state.dialogue_speaker<br>           text = <span class="hljs-string">f&quot;当前语音助手： <span class="hljs-subst">&#123;speaker&#125;</span>。&quot;</span><br>           st.toast(text)<br>       <br>       <span class="hljs-keyword">if</span> PROJECTS[dialogue_project][<span class="hljs-string">&#x27;config_path&#x27;</span>] == <span class="hljs-string">&quot;&quot;</span>:<br>           hps = <span class="hljs-literal">None</span><br>           speakers = []<br>       <span class="hljs-keyword">else</span>:<br>           hps = get_hparams_from_file(PROJECTS[dialogue_project][<span class="hljs-string">&#x27;config_path&#x27;</span>])<br>           speaker_ids = hps.data.spk2id<br>           speakers = <span class="hljs-built_in">list</span>(speaker_ids.keys())<br>       dialogue_speaker = st.selectbox(<span class="hljs-string">&quot;请选择语音助手：&quot;</span>,<br>                                    speakers,<br>                                    index=<span class="hljs-number">0</span>,<br>                                    on_change=on_speaker_change,<br>                                    key=<span class="hljs-string">&quot;dialogue_speaker&quot;</span>,<br>                                    )<br>       <br>       sdp_ratio = st.slider(<span class="hljs-string">&quot;sdp ratio:&quot;</span>, <span class="hljs-number">0.0</span>, <span class="hljs-number">1.0</span>, SDP_RATIO, <span class="hljs-number">0.1</span>)<br>       noise_scale = st.slider(<span class="hljs-string">&quot;noise scale:&quot;</span>, <span class="hljs-number">0.1</span>, <span class="hljs-number">2.0</span>, NOISE_SCALE, <span class="hljs-number">0.1</span>)<br>       noise_scale_w = st.slider(<span class="hljs-string">&quot;noise scale w:&quot;</span>, <span class="hljs-number">0.1</span>, <span class="hljs-number">2.0</span>, NOISE_SCALE_W, <span class="hljs-number">0.1</span>)<br>       length_scale = st.slider(<span class="hljs-string">&quot;length scale:&quot;</span>, <span class="hljs-number">0.1</span>, <span class="hljs-number">2.0</span>, LENGTH_SCALE, <span class="hljs-number">0.1</span>)<br></code></pre></td></tr></table></figure>
+
+<p>其中，PROJECTS&#x2F;SDP_RATIO&#x2F;NOISE_SCALE&#x2F;NOISE_SCALE_W&#x2F;LENGTH_SCALE在configs&#x2F;audio_config.py（我自己额外增加的配置文件）定义，格式如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 请填写/修改对应文件的路径，其中xxx.pth为BERT-VITS2训练得到的模型文件，config.json文件为训练过程中用到的配置文件。具体请参考BERT-VITS2项目的说明。</span><br>PROJECTS = &#123;<br>    <span class="hljs-string">&quot;无&quot;</span>:&#123;<br>        <span class="hljs-string">&quot;model_path&quot;</span>:<span class="hljs-string">&quot;&quot;</span>,<br>        <span class="hljs-string">&quot;config_path&quot;</span>:<span class="hljs-string">&quot;&quot;</span>,<br>    &#125;,<br>    <span class="hljs-string">&quot;白河萤&quot;</span>:&#123;<br>        <span class="hljs-string">&quot;model_path&quot;</span>:<span class="hljs-string">&quot;./audio/Data/hotaru/models/hotaru_G_900.pth&quot;</span>,<br>        <span class="hljs-string">&quot;config_path&quot;</span>:<span class="hljs-string">&quot;./audio/Data/hotaru/config.json&quot;</span>,<br>    &#125;,<br>    <span class="hljs-string">&quot;稻穗信&quot;</span>:&#123;<br>        <span class="hljs-string">&quot;model_path&quot;</span>:<span class="hljs-string">&quot;./audio/Data/shin/models/shin_G_600.pth&quot;</span>,<br>        <span class="hljs-string">&quot;config_path&quot;</span>:<span class="hljs-string">&quot;./audio/Data/shin/config.json&quot;</span>,<br>    &#125;,<br>    <span class="hljs-string">&quot;嘉神川克罗艾&quot;</span>:&#123;<br>        <span class="hljs-string">&quot;model_path&quot;</span>:<span class="hljs-string">&quot;./audio/Data/chloe/models/chloe_G_1500.pth&quot;</span>,<br>        <span class="hljs-string">&quot;config_path&quot;</span>:<span class="hljs-string">&quot;./audio/Data/chloe/config.json&quot;</span>,<br>    &#125;,<br>    <span class="hljs-string">&quot;嘉神川诺艾儿&quot;</span>:&#123;<br>        <span class="hljs-string">&quot;model_path&quot;</span>:<span class="hljs-string">&quot;./audio/Data/noelle/models/noelle_G_500.pth&quot;</span>,<br>        <span class="hljs-string">&quot;config_path&quot;</span>:<span class="hljs-string">&quot;./audio/Data/noelle/config.json&quot;</span>,<br>    &#125;,<br>    <span class="hljs-string">&quot;三城柚莉&quot;</span>:&#123;<br>        <span class="hljs-string">&quot;model_path&quot;</span>:<span class="hljs-string">&quot;./audio/Data/yuzuri/models/yuzuri_G_1000.pth&quot;</span>,<br>        <span class="hljs-string">&quot;config_path&quot;</span>:<span class="hljs-string">&quot;./audio/Data/yuzuri/config.json&quot;</span>,<br>    &#125;,<br>&#125;<br><br>DEFAULT_PROJECT = <span class="hljs-string">&quot;无&quot;</span><br><br>SDP_RATIO = <span class="hljs-number">0.5</span><br>NOISE_SCALE = <span class="hljs-number">0.6</span><br>NOISE_SCALE_W = <span class="hljs-number">0.9</span><br>LENGTH_SCALE = <span class="hljs-number">1.0</span><br><br>DEFAULT_EMOTION = <span class="hljs-string">&#x27;Normal&#x27;</span><br>DEVICE = <span class="hljs-string">&#x27;cuda&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>AudioGenerator是我实现的用于将文本转换为语音的类，get_hparams_from_file为BERT-VITS2中的函数，这里不再细讲，详情请参考我github上的代码。</p>
+<p>然后是实现文本转音频的函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">convert_text_to_audio</span>(<span class="hljs-params">text:<span class="hljs-built_in">str</span></span>):<br>       flag = <span class="hljs-literal">True</span><br>       params = <span class="hljs-built_in">dict</span>()<br>       <span class="hljs-keyword">try</span>:<br>           text_chunks = text.split(<span class="hljs-string">&quot;。&quot;</span>)<br>           audio_data = []<br>           <span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> text_chunks:<br>               <span class="hljs-keyword">if</span> t == <span class="hljs-string">&quot;&quot;</span>:<br>                   <span class="hljs-keyword">continue</span><br>               audio_data_part,params[<span class="hljs-string">&#x27;sample_rate&#x27;</span>] = st.session_state[<span class="hljs-string">&#x27;audio_generator&#x27;</span>].convert_text_to_audio(t,                                                                                                   dialogue_speaker,                                                                                           sdp_ratio,                                                                                                   noise_scale,                                                                                                 noise_scale_w,                                                                                               length_scale,                                                                                     		  emotion=DEFAULT_EMOTION,                                                                                     prompt_mode= <span class="hljs-string">&#x27;Text prompt&#x27;</span>)<br><br>               audio_data.append(audio_data_part)<br>           audio_data = np.concatenate(audio_data)<br>       <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>           <span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(e))<br>           <span class="hljs-built_in">print</span>(<span class="hljs-built_in">str</span>(e))<br>           traceback.print_exc()<br>           traceback.print_exc(file=<span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;log.txt&#x27;</span>, <span class="hljs-string">&#x27;a&#x27;</span>))<br>           flag = <span class="hljs-literal">False</span><br>               <br>       <span class="hljs-keyword">if</span> flag == <span class="hljs-literal">True</span>:<br>           audio_element = Audio(content=audio_data,**params)<br>           <span class="hljs-keyword">return</span> audio_element<br>       <span class="hljs-keyword">else</span>:<br>           <span class="hljs-keyword">return</span><br></code></pre></td></tr></table></figure>
+
+<p>convert_text_to_audio负责将文本转变成Audio类（其中Audio为Langchain-Chatchat自己实现的类，为OutputElement的子类）。转为Audio类之后，后续就可以很方便地展示在网页中了。</p>
+<p>以LLM对话模式为例，如果我们想要展示音频，首先需要在chat_box.ai_say中增加一个额外的Element，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> dialogue_mode == <span class="hljs-string">&quot;LLM 对话&quot;</span>:<br>    <span class="hljs-keyword">if</span> dialogue_project != <span class="hljs-string">&quot;无&quot;</span>:<br>       chat_box.ai_say([<span class="hljs-string">&quot;正在思考...&quot;</span>,<br>                        <span class="hljs-string">&quot;请等待语音生成...&quot;</span>])<br>    <span class="hljs-keyword">else</span>:<br>       chat_box.ai_say([<span class="hljs-string">&quot;正在思考...&quot;</span>])<br></code></pre></td></tr></table></figure>
+
+<p>这里新增的元素（“请等待语音生成…”）后续可以被替换成Audio。</p>
+<p>大模型在得到回答后，首先通过convert_text_to_audio把回答的文本转换为Audio，然后再通过chat_box.update_msg将对应element_index下的元素替换成Audio：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">chat_box.update_msg(text, element_index=<span class="hljs-number">0</span>,streaming=<span class="hljs-literal">False</span>, metadata=metadata)  <span class="hljs-comment"># 更新最终的字符串，去除光标</span><br><span class="hljs-keyword">if</span> dialogue_project != <span class="hljs-string">&quot;无&quot;</span>:<br>	audio_element = convert_text_to_audio(text)<br>	<span class="hljs-keyword">if</span> audio_element != <span class="hljs-literal">None</span>:<br>		chat_box.update_msg(audio_element, element_index=<span class="hljs-number">1</span>,streaming=<span class="hljs-literal">False</span>)<br>	<span class="hljs-keyword">else</span>:<br>		chat_box.update_msg(<span class="hljs-string">&quot;语音生成失败! 请检查报错文件log.txt!&quot;</span>, element_index=<span class="hljs-number">1</span>,streaming=<span class="hljs-literal">False</span>)<br></code></pre></td></tr></table></figure>
+
+<p>这里替换的是”请等待语音生成…”，其element_index&#x3D;1。另外记得把streaming设置为False。</p>
+<p>其他对话模式也是同理，这里就不再重复。</p>
+<p><strong>另外，这里面有个大坑！</strong>虽然Langchain-Chatchat内有Audio&#x2F;Image&#x2F;Video等类，但是Streamlit的的ChatBox类下的export2md函数并不支持音频格式，且未做区分。直接使用会导致报错。因此需要对环境里的streamlit_chatbox&#x2F;messages.py进行修改，请把182行的代码修改为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">contents = [e.content <span class="hljs-keyword">for</span> e <span class="hljs-keyword">in</span> msg[<span class="hljs-string">&quot;elements&quot;</span>] <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(e.content) == <span class="hljs-built_in">str</span>]<br></code></pre></td></tr></table></figure>
+
+<h2><span id="最后">最后</span></h2><p>未来打算尝试将本地AI绘画的lora模型融入进去。另外还有一些东西没细讲，例如BM25的实现、Embedding模型的选取等等，各位可以参考下我github上的代码。</p>
+
+	</article>
+
+	 
+    <div class="kira-post-copyright">
+        <strong>本文作者：</strong>ChocolateBlack<br>
+        <strong>本文链接：</strong><a href="http://chocolateblack.club/2024/03/20/%E5%9F%BA%E4%BA%8ELangchain-Chatchat%E5%92%8CBERT-VITS2%E5%AE%9E%E7%8E%B0RAG%E5%A4%9A%E8%B7%AF%E5%8F%AC%E5%9B%9E+AI%E8%AF%AD%E9%9F%B3%E7%94%9F%E6%88%90/" title="http:&#x2F;&#x2F;chocolateblack.club&#x2F;2024&#x2F;03&#x2F;20&#x2F;基于Langchain-Chatchat和BERT-VITS2实现RAG多路召回+AI语音生成&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;chocolateblack.club&#x2F;2024&#x2F;03&#x2F;20&#x2F;基于Langchain-Chatchat和BERT-VITS2实现RAG多路召回+AI语音生成&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+  
+	<div class="kira-post-nav">
+		<nav class="post-nav">
+			  
+			<!-- 先找到与当前文字相同的目录 -->
+			               
+			<!-- 在找到当前文章所在的 index -->
+			                
+			<!-- 上一篇文章 -->
+			<div class="old">
+				<span>上一章</span>
+				<a href="/2021/06/21/Windows%E4%B8%8B%E9%85%8D%E7%BD%AEOpenMVG/"> Windows下配置OpenMVG+CMVS-PMVS</a>
+			</div>
+			                          
+		</nav>
+	</div>
+	
+	<div class="kira-post-meta kira-rainbow">
+		
+			<a class="kirafont icon-appstore-fill -link" href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a>
+		
+		
+			<a class="kirafont icon-tag-fill -none-link" href="/tags/RAG/" rel="tag">RAG</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" rel="tag">人工智能</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/" rel="tag">大语言模型</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/%E8%AF%AD%E9%9F%B3%E7%94%9F%E6%88%90/" rel="tag">语音生成</a>
+		
+	</div>
+	
+		<script src="/js/kira-code-copy.js"></script>
+	
+	
+	<div class="kira-post-footer">
+		
+
+		
+	</div>
+	
+</div>
+
+				</div>
+			</div>
+			<div class="kira-right-column">
+	<a onclick="document.querySelector('#kira-top-header').scrollIntoView({behavior: 'smooth'});" class="kira-backtotop" aria-label="回到顶部" title="回到顶部">
+		<button class="mdui-fab mdui-ripple">
+			<i class="kirafont icon-caret-up"></i>
+		</button>
+	</a>
+</div>
+
+		</div>
+	</body>
+</html>
