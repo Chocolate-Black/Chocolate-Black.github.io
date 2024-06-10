@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html 
+	lang="zh">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+<link rel="stylesheet" href="/css/layout.css">
+
+		
+		<title> Blog</title>
+		<link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+		<script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+		<!-- lazyload -->
+		<script src="https://unpkg.com/lazysizes@5.1.0/lazysizes.min.js"></script>
+		<!-- smooth-scrolling -->
+		<script src="https://unpkg.com/smooth-scrolling.js@1.0.0"></script>
+		<!-- highlight -->
+		<link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.6.0/styles/atom-one-dark.min.css" />
+		<script src="//unpkg.com/@highlightjs/cdn-assets@11.6.0/highlight.min.js"></script>
+		<!-- 预置 kiraicon -->
+		<link rel="stylesheet" href="/lib/iconfont/iconfont.css" crossorigin />
+		
+			<link rel="stylesheet" href="//at.alicdn.com/t/c/font_3299330_2a7ov96q7e3.css" crossorigin />
+		
+		<link rel="stylesheet" href="/lib/iconfont/iconfont.css" crossorigin />
+		<link
+			rel="shortcut icon"
+			href="https://z4a.net/images/2023/03/26/new_ava.png"
+			type="image/png"
+		/>
+		<link rel="stylesheet" href="/deps/css/APlayer.min.css">
+		
+			
+		<link rel="stylesheet" href="/style.css" />
+			
+		<link rel="stylesheet" href="/custom.css" />
+			
+		
+		<script src="/deps/js/APlayer.min.js"></script>
+		<script src="/deps/js/Meting.min.js"></script>
+	<meta name="generator" content="Hexo 6.3.0"></head>
+
+	<body>
+		<div
+			class="kira-background"
+			style="background-image: url('https://z4a.net/images/2023/03/26/linxing.png')"
+		></div>
+		<div class="kira-header">
+    <a
+        class="kira-drawer-button mdui-ripple"
+        title="导航栏"
+        onclick="document.querySelector('.kira-sidebar-modal').classList.add('show');document.querySelector('.kira-sidebar#sidebar').classList.add('show');"
+    >
+        <i class="kirafont icon-menu"></i>
+    </a>
+    <a href="/" title="Blog">
+        <img
+			src="https://z4a.net/images/2023/03/26/1.jpg"
+			alt="ChocolateBlack"
+		/>
+    </a>
+</div>
+		<div class="kira-body">
+			<div class="kira-sidebar" id="sidebar">
+	<div class="kira-avatar mdui-ripple">
+		<a target="_blank" rel="noopener" href="https://z4a.net/images/2023/03/26/1.jpg" title="ChocolateBlack">
+			<img
+				src="https://z4a.net/images/2023/03/26/1.jpg"
+				alt="ChocolateBlack"
+			/>
+		</a>
+	</div>
+	<div class="kira-count">
+		<div><span>文章</span>20</div>
+		<div><span>标签</span>26</div>
+		<div><span>分类</span>5</div>
+	</div>
+	<div class="kira-list">
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/"
+			title="回到首页"
+		>
+			<i
+				class="kirafont icon-home"
+			></i>
+			<div class="kira-list-item-content">回到首页</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/archive.html"
+			title="文章归档"
+		>
+			<i
+				class="kirafont icon-container"
+			></i>
+			<div class="kira-list-item-content">文章归档</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/about.html"
+			title="关于本人"
+		>
+			<i
+				class="kirafont icon-user"
+			></i>
+			<div class="kira-list-item-content">关于本人</div>
+		</a>
+		
+		<a
+			class="kira-list-item mdui-ripple false"
+			href="/friends.html"
+			title="我的朋友"
+		>
+			<i
+				class="kirafont icon-team"
+			></i>
+			<div class="kira-list-item-content">我的朋友</div>
+		</a>
+		
+	</div>
+	<aside id="kira-sidebar">
+		 <div class="kira-widget-wrap">
+	<div class="kira-widget kira-social">
+		<a
+			class="mdui-ripple"
+			href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=1106187173&website=www.oicqzone.com"
+			target="_blank"
+			mdui-tooltip="{content: 'QQ'}"
+			style="
+				color: rgb(49, 174, 255);
+				background-color: rgba(49, 174, 255, .1);
+			"
+		>
+			<i
+				class="kirafont icon-QQ"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://space.bilibili.com/2106744"
+			target="_blank"
+			mdui-tooltip="{content: '哔哩哔哩'}"
+			style="
+				color: rgb(231, 106, 141);
+				background-color: rgba(231, 106, 141, .15);
+			"
+		>
+			<i
+				class="kirafont icon-bilibili"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://github.com/Chocolate-Black"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(25, 23, 23);
+				background-color: rgba(25, 23, 23, .15);
+			"
+		>
+			<i
+				class="kirafont icon-github"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://gitee.com/xu_jing_yu/"
+			target="_blank"
+			mdui-tooltip="{content: 'Gitee'}"
+			style="
+				color: rgb(165, 15, 15);
+				background-color: rgba(165, 15, 15, .15);
+			"
+		>
+			<i
+				class="kirafont icon-gitee"
+			></i> </a
+		>
+	</div>
+</div>
+  
+<div class="kira-widget-wrap">
+  <h3 class="kira-widget-title">分类</h3>
+  <div class="kira-widget">
+
+    <ul class="category-list">
+
+      
+
+
+      
+
+      
+
+      <li class="category-list-item">
+        <a class="category-list-link" href="/categories/同人/">同人</a>
+        <span class="category-list-count">1</span>
+      </li>
+
+      
+
+      <li class="category-list-item">
+        <a class="category-list-link" href="/categories/我的项目/">我的项目</a>
+        <span class="category-list-count">2</span>
+      </li>
+
+      
+
+      <li class="category-list-item">
+        <a class="category-list-link" href="/categories/技术教程/">技术教程</a>
+        <span class="category-list-count">5</span>
+      </li>
+
+      
+
+      <li class="category-list-item">
+        <a class="category-list-link" href="/categories/经验分享/">经验分享</a>
+        <span class="category-list-count">2</span>
+      </li>
+
+      
+
+      <li class="category-list-item">
+        <a class="category-list-link" href="/categories/评测/">评测</a>
+        <span class="category-list-count">13</span>
+      </li>
+
+      
+    </ul>
+
+  </div>
+</div>
+  
+<div class="kira-widget-wrap">
+	<div id="randomtagcloud" class="kira-widget tagcloud kira-rainbow"><a href="/tags/AVG/" style="font-size: 20px;">AVG</a> <a href="/tags/C%E8%AF%AD%E8%A8%80/" style="font-size: 10px;">C语言</a> <a href="/tags/PC%E6%B8%B8%E6%88%8F/" style="font-size: 15px;">PC游戏</a> <a href="/tags/RAG/" style="font-size: 10px;">RAG</a> <a href="/tags/%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA/" style="font-size: 10px;">三维重建</a> <a href="/tags/%E4%B8%AD%E7%AF%87/" style="font-size: 10px;">中篇</a> <a href="/tags/%E4%BA%BA%E4%BD%93%E5%8A%A8%E4%BD%9C%E8%AF%86%E5%88%AB/" style="font-size: 10px;">人体动作识别</a> <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" style="font-size: 17.5px;">人工智能</a> <a href="/tags/%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">图神经网络</a> <a href="/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/" style="font-size: 10px;">大语言模型</a> <a href="/tags/%E5%A5%87%E5%B9%BB/" style="font-size: 10px;">奇幻</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" style="font-size: 10px;">微信小程序</a> <a href="/tags/%E6%81%8B%E7%88%B1/" style="font-size: 15px;">恋爱</a> <a href="/tags/%E6%81%90%E6%80%96/" style="font-size: 10px;">恐怖</a> <a href="/tags/%E6%82%AC%E7%96%91/" style="font-size: 15px;">悬疑</a> <a href="/tags/%E6%89%8B%E6%9C%BA%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">手机游戏</a> <a href="/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/" style="font-size: 12.5px;">推荐系统</a> <a href="/tags/%E6%96%B0%E6%B5%B7%E8%AF%9A/" style="font-size: 10px;">新海诚</a> <a href="/tags/%E6%98%8E%E6%97%A5%E6%96%B9%E8%88%9F/" style="font-size: 10px;">明日方舟</a> <a href="/tags/%E6%B2%BB%E6%84%88/" style="font-size: 10px;">治愈</a> <a href="/tags/%E7%8E%B0%E5%AE%9E/" style="font-size: 10px;">现实</a> <a href="/tags/%E7%94%B5%E5%BD%B1/" style="font-size: 10px;">电影</a> <a href="/tags/%E7%A7%8B%E4%B9%8B%E5%9B%9E%E5%BF%86/" style="font-size: 12.5px;">秋之回忆</a> <a href="/tags/%E7%A7%91%E5%B9%BB/" style="font-size: 10px;">科幻</a> <a href="/tags/%E8%AF%AD%E9%9F%B3%E7%94%9F%E6%88%90/" style="font-size: 10px;">语音生成</a> <a href="/tags/%E9%9F%B3%E4%B9%90/" style="font-size: 10px;">音乐</a></div>
+	
+</div>
+
+ 
+	</aside>
+	<div class="kira-copyright">
+		&copy; 2024
+		<a href="/">ChocolateBlack</a
+		>
+		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> &
+		<!-- TODO: github 链接 -->
+		<a href="https://github.com/ch1ny/kira-hexo/" target="_blank">Kira-Hexo</a>
+		<br />
+		
+			<a href="https://beian.miit.gov.cn/" target="_blank">赣ICP备******号</a>
+		
+		
+	</div>
+</div>
+<div class="kira-sidebar-modal" id="sidebar-modal" onclick="(function(self) {
+	self.classList.remove('show');
+	document.querySelector('.kira-sidebar.show#sidebar').classList.remove('show');
+})(this)"></div>
+			<div class="kira-content">
+				<div id="kira-top-header"></div>
+				<div class="kira-main-content">
+					
+<link rel="stylesheet" href="/css/kira-image.css">
+
+<script src="/js/kira-image.js"></script>
+<div class="kira-image">
+    <div class="kira-image-modal">
+        <div class="kira-image-header">
+            <div class="kira-image-counter"></div>
+            <div class="kira-image-title"></div>
+            <div class="kira-image-operation">
+                <div class="kira-image-operation-button" id="kira-image-operation-button-zoom">
+                    <i class="kirafont icon-zoom-in"></i>
+                </div>
+                <div class="kira-image-operation-button" id="kira-image-operation-button-close">
+                    <i class="kirafont icon-close"></i>
+                </div>
+            </div>
+        </div>
+        <div class="kira-image-container">
+            <div class="kira-image-prev-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-left"></i>
+                </div>
+            </div>
+            <div class="kira-image-list">
+                <div class="kira-image-prev">
+                    <img />
+                </div>
+                <div class="kira-image-now">
+                    <img />
+                </div>
+                <div class="kira-image-next">
+                    <img />
+                </div>
+            </div>
+            <div class="kira-image-next-button-panel">
+                <div class="kira-image-exchange-button">
+                    <i class="kirafont icon-right"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="kira-post">
+	<article>
+		
+		<div class="kira-post-cover">
+			<img
+				data-src="https://blob.keylol.com/forum/202103/18/182101qne3m3w43jakdfmy.jpg"
+				data-sizes="auto"
+				alt=""
+				class="lazyload kira-post-cover-image disabled-kira-image"
+			/>
+			<h1></h1>
+		</div>
+		
+		<div class="kira-post-meta kira-rainbow" style="margin:10px 0!important;">
+			<a><i class="kirafont icon-calendar-fill"></i>2024年04月27日</a>
+			<a><i class="kirafont icon-areachart"></i>2.7k 字</a>
+			<a><i class="kirafont icon-time-circle-fill"></i>大概 11 分钟</a>
+		</div>
+		<h3><span id="前言">前言</span></h3><p>其实五年前，大概中文没出那会，我就已经跟着翻译云过一遍MO8了。那个时候我才刚大一，而如今我已经研二了，时间过得真快。</p>
+<p>因为某些契机，五年后我打开了MO8中文版，重温了一遍本体剧情，并把之前搁置N久的柚子DLC和FD剧情打完了。翻了下我五年前写的测评，感觉写的还是比较简略，因为那时玩过MO8的人很少，怕剧透所以没敢写多。</p>
+<p>现在的话，考虑到玩完MO8的朋友已经很多了，所以就打算好好写一篇长评，谈谈我对MO8的看法。</p>
+<h3><span id="谈谈bampc真相线fd瑞羽线">谈谈B&amp;C真相线+FD瑞羽线</span></h3><p>当年我刚云完MO8，给了很高的评价。然而五年后再次重温，我却心情极度复杂……</p>
+<p>说它好吧，B&amp;C真相线真的很灾难……</p>
+<p>说它不好吧，双子线的质量又奇高。</p>
+<p>在我心目中（个人评价），MO8有着MO史上最差主线（B&amp;C），以及MO史上最好支线（双子线）。</p>
+<p>在详细评价之前，我首先说下我个人的剧情喜好，以供各位参考。我其实对风格上不是那么挑，无论像SM那种平淡成熟风，还是MO6那种轻松校园风，又或是MO7&#x2F;8这种黑暗残酷风，我都能接受——前提是剧情&#x2F;人物塑造要好，人物行为逻辑要合理。</p>
+<p>所以，我不是不能接受MO8搞黑深残的花活，但编剧你起码逻辑站得住脚啊。一个人要黑，起码得把动机说明白，有铺垫，符合人物逻辑才行。</p>
+<p>像MO7里，千夏的黑化（指雨夜挥铲）就属于是合理发展。千夏的家庭环境和童年遭遇，造成了她偏执的性格，并且这些内容（包括黑化的预兆）在共通线部分都有铺垫。因此，雨夜挥铲的剧情只会让人觉得惊讶（又或是惊悚），但不至于让人觉得过于离谱。</p>
+<p>然而MO8 B&amp;C的黑化剧情，就纯属瞎整……人物行为逻辑一塌糊涂。</p>
+<p>B&amp;C行为逻辑最没整明白的就是莉一。在柚莉DLC没出之前，涉及他究极妹控喜欢琴莉的剧情，毫无铺垫。</p>
+<p>此外，莉一唆使杀人的动机，也难以站得住脚。</p>
+<p>首先谈诺艾尔遇刺未遂案。按B&amp;C设定来说，莉一只是极度喜欢真琴莉，干不干诺艾尔跟他有何关系？盗巧信帮希莉的动机根本就不存在。</p>
+<p>我估计编剧后来也回过来味觉得不对了……于是在FD瑞羽线紧急打了个补丁，把锅全部甩给假琴莉。</p>
+<p>但即使这样，久世遇刺案还是难以解释。首先，久世的调查资料能否会破坏三城家的幸福稳定，这首先就得打个问号。其次，就算这些调查资料会造成威胁，莉一也不可能因为这事去指挥希莉动手，动手三城一家兄妹肯定完蛋，母亲谁来照顾？（在本篇+FD柚莉线莉一和柚莉都十分重视母亲，以这俩人的性格除非完全无路可走，否则不可能铤而走险）</p>
+<p>如果把这个锅再甩给假琴莉，那更说不通了。假琴莉的使命和愿望是跟累在一起，久世这些事假琴莉真的在乎么？事实上本篇里假琴莉一开始也接受了久世的询问，说明没啥敌意。</p>
+<p>这唯一能勉强解释得通的逻辑就是：假琴莉十恶不赦，莉一想要保护妹妹嗯背黑锅。但后面绑架部分的剧情又让这样的逻辑站不住脚……</p>
+<p>我个人感觉，编剧属实是很想找个人在B&amp;C当反派，于是就指着莉一说：你当下反派，骂名我来担。</p>
+<p>这就是没活嗯整。</p>
+<p>然后，即使假设B&amp;C的人物逻辑都整明白了，这个结局也难以让人接受。</p>
+<p>这条线的结局，男主确实知道全部真相了，心里的雨也确实停了。然而代价呢？</p>
+<p>久世死了。</p>
+<p>诺艾尔差点死了。忙前忙后帮男主寻真相解心结，两人还上床了。结果后续还是被甩了，甚至没有一个专属GE。</p>
+<p>三城一家完全毁了。难以想象柚莉该怎么面对之后的生活。</p>
+<p>玩完之后细品，真的会忍不住说一句《冰汽时代》的结束语：</p>
+<p>“这一切值得吗？”</p>
+<p>如果只是本篇这样，FD给个好的交代，我还勉强能忍，结果我打FD瑞羽线的时候彻底绷不住了。</p>
+<p>我本来是想看FD瑞羽线怎么去解决那一大堆烂摊子，好家伙，这条线的男主真的完全在逃避问题，丝毫没有主动性——</p>
+<p>瑞羽退学在家，男主一点都没考虑过该如何帮助瑞羽复学，就眼睁睁看着瑞羽赋闲在家。</p>
+<p>柚莉精神接近崩溃，始终没能苏醒，男主从来没主动关心过，也没想着让时隔7年未曾相见的姐妹见上一面。不是秋村打电话我看男主完全不打算回去了。</p>
+<p>久世去世后那么久，不看新闻都没想着去祭奠一下。</p>
+<p>飞回Yukuru见到诺艾尔，内心毫无愧疚拒绝道歉。</p>
+<p>这条线的累除了谈个B恋爱，毫无作为，永远逃避，极度自私。说句实话，这条线我玩完柚莉瑞羽重逢剧情后，我就直接全C了，打不了一点。</p>
+<p>这条线让人麻的程度堪比雨后1巴线，难得打个后传还能被搞红温，编剧你可真行。</p>
+<h3><span id="谈谈双子线fd柚莉amp琴莉线">谈谈双子线+FD柚莉&amp;琴莉线</span></h3><p>“我本可以忍受黑暗，如果我不曾见过光明。”</p>
+<p>这句话完美符合我打MO8本篇+FD的心路历程。</p>
+<p>再次重温MO8 B&amp;C，让我最心痛的无疑是柚莉这个角色，以至于打FD瑞羽线的时候我只想知道编剧如何处理柚莉部分的剧情。</p>
+<p>而这很大程度上要归功于双子线优秀的人物塑造。</p>
+<p>双子线在我心目中属于MO系列最佳支线，甚至我认为就是MO系列最好的一条线（个人私心哈哈）。</p>
+<p>我自认为也算个AVG老玩家了，虽然游戏经历不算海量，但绝大部分经典名作都有玩过。MO系列除了3我也基本都没拉下。看过这么多经典作品，想要再找到一个能打动我的故事，找到一个能打动我的人物，真的比较困难。</p>
+<p>但MO8的双子线做到了，这就是我想要看的故事，这就是我欣赏的人物。</p>
+<p>五年前，跟随翻译云完的我就已经非常喜欢双子线（当时我还建了三城柚莉吧，写了第一篇柚莉同人，参加秋吧夏令营拿了最佳文笔奖）。五年后重温，我再一次被这条线打动。</p>
+<p>双子线是一个看似很“妄想科学”，实则特别“MO”的故事。</p>
+<p>从主题内核来讲，双子线与MO1唯笑线高度一致。</p>
+<p>MO1的唯笑，是彩花和智也的青梅竹马。看到两情相悦的彩花和智也，唯笑选择隐藏心意，默默地在背后支持二人。</p>
+<p>MO8的柚莉，是琴莉的姐姐，累的青梅竹马。看到互有好感的琴莉和累，柚莉像唯笑一样，隐藏了自己的心意。想要被当成一个可爱的小女孩来对待，想要给累送上一份巧克力……即使这些愿望都没有成真，柚莉也依旧愿意支持二人。</p>
+<p>这样下去就挺好。也许唯笑和柚莉都是这么想的。</p>
+<p>但是，因为一场车祸，一场火灾，这本该平稳的关系，被永久地改变了。</p>
+<p>MO1的智也，对彩花的死耿耿于怀，始终难以放下。</p>
+<p>MO8的累，对琴莉的思念，又何尝不像智也对彩花的思念？</p>
+<p>所以当累第一次进入Yukuru的时候，信就已经把他当作智也看待。信作为过来人，太了解了。少年的二人，都曾活在雨中。</p>
+<p>MO1的唯笑，在感伤彩花离世之余，内心压抑许久的感情，开始渐渐浮出水面。</p>
+<p>MO8的柚莉，因为喜欢累却难以正视这份感情，加上母亲对琴莉的思念，于是在一种扭曲的状态下诞生了假琴莉的人格。</p>
+<p>爱在心口难开，是对唯笑和柚莉的精准评价。</p>
+<p>MO1唯笑线的主题，讲的就是智也和唯笑如何从过去的阴影中走出来，如何正视自己的感情，如何珍惜当下。智也在信的帮助下，终于意识到唯笑对自己来说是如此重要，终于肯放下对彩花的思念。唯笑也终于敢直视自己内心的情感，终于有勇气将这份爱意表达。两人共同从雨中走出，活在当下，面向未来。</p>
+<p>MO8双子线的主题，和MO1唯笑线是一样的。在故事中，由假琴莉人格引发的一系列矛盾，最终促使累意识到柚莉在自己内心的重要地位；柚莉也终于敢正视自己的情感，不再一味退让。故事的结尾，雨停了，柚莉的病也好了，两人终成眷侣。</p>
+<p>时隔这么多年，MO8双子线的编剧能够想到致敬作品起点，并且无论在故事还是人物塑造上都下足了功夫，真的非常值得点赞。</p>
+<p>特别的，双子线里还穿插了各种致敬MO1的片段。当我看到唯笑想要开导柚莉，并娓娓道来自己的故事时，我真的泪目了。</p>
+<p>唯笑在双子线中不仅仅只是承担了情怀任务，同样对剧情的发展产生了重要的推动作用。在唯笑的帮助下，柚莉终于开始尝试正视自己对累的情感。</p>
+<p>这样的情怀剧情怎能不爱？这简直就是客串剧情的标杆。</p>
+<p>MO8双子线在某种程度上来说可以看作黑暗版唯笑线，柚莉&#x3D;唯笑，假琴莉&#x3D;黑化彩花。</p>
+<p>除此之外还有信提到MO5光之阶梯的台词、请求彩花保佑等一系列小彩蛋，也都做得很不错。</p>
+
+	</article>
+
+	 
+    <div class="kira-post-copyright">
+        <strong>本文作者：</strong>ChocolateBlack<br>
+        <strong>本文链接：</strong><a href="http://chocolateblack.club/2024/04/27/%E9%87%8D%E6%B8%A9MO8+%E5%88%9D%E8%A7%81FD%EF%BC%8C%E5%BF%83%E6%83%85%E6%9C%80%E5%A4%8D%E6%9D%82%E7%9A%84%E4%B8%80%E9%9B%86/" title="http:&#x2F;&#x2F;chocolateblack.club&#x2F;2024&#x2F;04&#x2F;27&#x2F;重温MO8+初见FD，心情最复杂的一集&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;chocolateblack.club&#x2F;2024&#x2F;04&#x2F;27&#x2F;重温MO8+初见FD，心情最复杂的一集&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+  
+	<div class="kira-post-nav">
+		<nav class="post-nav">
+			      
+			<!-- 先找到与当前文字相同的目录 -->
+			                              
+			<!-- 在找到当前文章所在的 index -->
+			                                    
+			<!-- 上一篇文章 -->
+			<div class="old">
+				<span>上一章</span>
+				<a href="/2024/03/16/%E7%AE%80%E8%AF%84%E3%80%8ASince%20Memories%E3%80%8B/"> 平淡还是平庸？谈一谈我对《Since Memories》的看法</a>
+			</div>
+			       
+			<!-- 下一篇文章 -->
+			<div class="new">
+				<span>下一章</span>
+				<a href="/2024/05/22/%E7%AE%80%E8%AF%84%E3%80%8A%E9%AD%94%E6%B3%95%E4%BD%BF%E4%B9%8B%E5%A4%9C%E3%80%8B/"> 简评《魔法使之夜》</a>
+			</div>
+			                                    
+		</nav>
+	</div>
+	
+	<div class="kira-post-meta kira-rainbow">
+		
+			<a class="kirafont icon-appstore-fill -link" href="/categories/%E8%AF%84%E6%B5%8B/">评测</a>
+		
+		
+			<a class="kirafont icon-tag-fill -none-link" href="/tags/AVG/" rel="tag">AVG</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/%E6%81%8B%E7%88%B1/" rel="tag">恋爱</a> <a class="kirafont icon-tag-fill -none-link" href="/tags/%E7%A7%8B%E4%B9%8B%E5%9B%9E%E5%BF%86/" rel="tag">秋之回忆</a>
+		
+	</div>
+	
+		<script src="/js/kira-code-copy.js"></script>
+	
+	
+	<div class="kira-post-footer">
+		
+
+		
+	</div>
+	
+</div>
+
+				</div>
+			</div>
+			<div class="kira-right-column">
+	<a onclick="document.querySelector('#kira-top-header').scrollIntoView({behavior: 'smooth'});" class="kira-backtotop" aria-label="回到顶部" title="回到顶部">
+		<button class="mdui-fab mdui-ripple">
+			<i class="kirafont icon-caret-up"></i>
+		</button>
+	</a>
+</div>
+
+		</div>
+	</body>
+</html>
